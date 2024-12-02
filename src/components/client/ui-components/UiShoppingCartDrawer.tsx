@@ -77,7 +77,7 @@ const ShoppingCartDrawer: React.FC<ShoppingCartDrawerProps> = ({
     }, 2000);
 
     // Redirect to checkout page
-    router.push("/client/checkout");
+    router.push("/client/checkout/sessionNumber");
   };
 
   return (

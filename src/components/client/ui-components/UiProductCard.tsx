@@ -49,6 +49,11 @@ const MultiActionAreaCard: React.FC<ProductCardProps> = ({ product }) => {
               variant="h6"
               component="div"
               align="center"
+              sx={{
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
             >
               {product.productName}
             </Typography>
