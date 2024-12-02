@@ -6,10 +6,10 @@ import { Types } from "mongoose";
 
 const CompanyInfo: ICompanyInfo = {
   companyId: new Types.ObjectId(),
-  companyName: "Imaginarium Of Vancouver",
-  address: "150 - 2188 No.5 Road, Richmond, BC, V6X 2T1",
-  email: "info@imaginariumofvancouver.com",
-  phone: "604.447.1644",
+  companyName: "ECommerce",
+  address: "123 - 4567 No.100 Road, Vancouver, BC, ABC DEF",
+  email: "info@ecommerce.com",
+  phone: "123.456.789",
 };
 
 const UiCarouselImages = [
@@ -43,7 +43,7 @@ const Products: IProduct[] = [
   {
     productId: "1",
     sku: "SKU-1",
-    defaultCategoryIds: ["all", "banner"],
+    defaultCategoryIds: ["all", "wide-format-print", "banner"],
     categoryIds: ["banner-stand"],
     productName: "Product 1",
     productCoverPic:
@@ -261,7 +261,7 @@ const Products: IProduct[] = [
   {
     productId: "3",
     sku: "SKU-3",
-    defaultCategoryIds: ["all", "business-card"],
+    defaultCategoryIds: ["all", "regilar-format-print", "card","business-card"],
     categoryIds: ["business-card", "best-sellers"], //save the last child
     productName: "Product 3",
     productCoverPic: "Not Found",
@@ -289,8 +289,8 @@ const Products: IProduct[] = [
     productId: "4",
     sku: "BBVBCB00",
     defaultCategoryIds: ["all", "best-sellers"],
-    categoryIds: ["best-sellers"], //save the last child
-    productName: "Custom Vinyl Banners",
+    categoryIds: ["best-sellers", "banner"], //save the last child
+    productName: "Custom Vinyl Banner",
     productCoverPic:
       "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/c/u/custom-vinyl-banner-white-bg.jpg",
     productPics: [
@@ -339,9 +339,9 @@ const Products: IProduct[] = [
   {
     productId: "5",
     sku: "BBSTRE01",
-    defaultCategoryIds: ["all", "banners", "vinyl-banner", "event-banners"],
-    categoryIds: ["event-banners"], //save the last child
-    productName: "Step and Repeat Banners",
+    defaultCategoryIds: ["all", "banner","retractable-banner"],
+    categoryIds: ["retractable-banner"], //save the last child
+    productName: "Step and Repeat Banner",
     productCoverPic:
       "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/m/i/microsoftteams-image_17_.png",
     productPics: [
@@ -380,8 +380,8 @@ const Products: IProduct[] = [
     productId: "6",
     sku: "BBVBCB01",
     defaultCategoryIds: ["all", "best-sellers"],
-    categoryIds: ["best-sellers"], //save the last child
-    productName: "Indoor Banners",
+    categoryIds: ["best-sellers", "banner"], //save the last child
+    productName: "Indoor Banner",
     productCoverPic:
       "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/m/i/microsoftteams-image_17_.png",
     productPics: [
@@ -586,7 +586,7 @@ const ProductCategories: IProductCategory[] = [
     description: "All products",
     children: [
       "design-service",
-      "Regilar-format-print",
+      "regilar-format-print",
       "wide-format-print",
       "installation-service",
       "others",
@@ -601,7 +601,7 @@ const ProductCategories: IProductCategory[] = [
     children: ["logo-design", "banner-design", "business-card-design"],
   },
   {
-    categoryId: "Regilar-format-print",
+    categoryId: "regilar-format-print",
     name: "Regilar Format Print",
     description: "Regilar Format Print",
     children: ["card", "book", "label", "flyer"],

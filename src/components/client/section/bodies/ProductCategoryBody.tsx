@@ -12,27 +12,21 @@ import Stack from "@mui/material/Stack";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { IconButton } from "@mui/material";
-import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
+import { ArrowUpward, ArrowDownward, BorderAll } from "@mui/icons-material";
 import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 import UiPagingation from "@/components/client/ui-components/UiPagination";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/material/styles";
+import { IProductCategory } from "@/lib/models/interfaces/IProductCategory";
 
 // client/product-categories/{category-id}
 
 interface BodyComponentsProps {
-  category: Category; // Define category as a prop
-}
-
-interface Category {
-  categoryId: string;
-  name: string;
-  description: string;
-  children: string[];
+  category: IProductCategory
 }
 
 const getSelfAndChildrenCategoryIds = (
-  categories: Category[],
+  categories: IProductCategory[],
   categoryId: string
 ): string[] => {
   const filteredCategoryIds: string[] = [];
@@ -51,24 +45,23 @@ const getSelfAndChildrenCategoryIds = (
 };
 
 const StyledSelect = styled(Select)({
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    background: 'white',
-    height: '40px',
-    width: '160px',
-    '&:hover': {
-      backgroundColor: '#f0f0f0',
-    },
-    '& .MuiSelect-select': {
-      padding: '8px 10px',
-    },
-    '& .MuiOutlinedInput-notchedOutline': {
-      border: 'none',
-    },
-  });
+  border: "1px solid #ccc",
+  borderRadius: "4px",
+  background: "white",
+  height: "40px",
+  width: "160px",
+  "&:hover": {
+    backgroundColor: "#f0f0f0",
+  },
+  "& .MuiSelect-select": {
+    padding: "8px 10px",
+  },
+  "& .MuiOutlinedInput-notchedOutline": {
+    border: "none",
+  },
+});
 
 const BodyComponents: React.FC<BodyComponentsProps> = ({ category }) => {
-  // Filter products based on categoryId
   const selfAndChildrenCategoryIds = getSelfAndChildrenCategoryIds(
     ProductCategories,
     category.categoryId
@@ -80,8 +73,8 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({ category }) => {
         selfAndChildrenCategoryIds.includes(categoryId)
       )
   );
-  const [sort, setSort] = useState("best-seller");
 
+  const [sort, setSort] = useState("best-seller");
   const [isUp, setIsUp] = useState(true);
 
   const handleArrowClick = () => {
@@ -92,33 +85,66 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({ category }) => {
     setSort(event.target.value as string);
   };
 
+  const sortedProducts = React.useMemo(() => {
+    const sorted = [...filteredProducts];
+    sorted.sort((a, b) => {
+      let comparison = 0;
+  
+      switch (sort) {
+        case "best-seller":
+          comparison = (b.sales || 0) - (a.sales || 0); // Fallback to 0 if sales is undefined
+          break;
+        case "popularity":
+          comparison = (b.popularity || 0) - (a.popularity || 0); // Fallback to 0 if popularity is undefined
+          break;
+        case "price":
+          comparison = (a.minSelection[1] || 0) - (b.minSelection[1] || 0); // Fallback to 0 if price is undefined
+          break;
+        case "product-name":
+          const nameA = a.productName || ""; // Fallback to empty string if name is undefined
+          const nameB = b.productName || ""; // Fallback to empty string if name is undefined
+          comparison = nameA.localeCompare(nameB);
+          break;
+        default:
+          break;
+      }
+  
+      return isUp ? comparison : -comparison; // Reverse order if `isUp` is false
+    });
+  
+    return sorted;
+  }, [filteredProducts, sort, isUp]);
+  
+
   return (
     <div>
       <Container className="max-w-container mx-auto">
         {/* Breadcrumbs */}
         <Box
-          style={{
+          sx={{
             display: "flex",
             flexWrap: "wrap",
             gap: "20px",
-            margin: "30px 0",
+            marginBottom: 2,
+            marginTop: 4,
+            marginX: 5,
           }}
         >
           <CategoryBreadcrumbs mCategoryId={category.categoryId} />
         </Box>
 
         {/* Category Name and Description */}
-        <Box>
+        <Box sx={{ marginX: 5 }}>
           <Typography variant="h5" component="h1">
             {category.name}
           </Typography>
-          <Typography variant="body1" component="p">
+          <Typography variant="body1" component="p" sx={{ paddingY: 2 }}>
             {category.description}
           </Typography>
         </Box>
 
         {/* Sorting */}
-        <Stack direction="row" justifyContent="right" alignItems="center">
+        <Stack direction="row" justifyContent="right" alignItems="center" sx={{ marginRight: 4 }}>
           <Typography variant="body1" component="p" marginRight={1}>
             Sort by
           </Typography>
@@ -134,38 +160,39 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({ category }) => {
             <MenuItem value="price">Price</MenuItem>
             <MenuItem value="product-name">Product Name</MenuItem>
           </StyledSelect>
-          {/* selection + up and down icon */}
-
           <IconButton onClick={handleArrowClick} aria-label="toggle-arrow-icon">
             {isUp ? <ArrowUpward /> : <ArrowDownward />}
           </IconButton>
         </Stack>
 
-        <Divider />
+        <Divider sx={{ marginY: 2 }} />
 
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1, marginX: 2, paddingTop: 4 }}>
           <Grid container spacing={0.5}>
-            {/* Filter */}
+            {/* Category Filter */}
             <Grid xs={2}>
-              <UiCategoryAccordion />
+              <Box sx={{ padding: 2 }}>
+                <UiCategoryAccordion category={category} />
+              </Box>
             </Grid>
 
             {/* Product Cards */}
-            <Grid xs={8}>
+            <Grid xs={10}>
               <Box
                 maxWidth="xl"
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "10px",
-                  padding: "0px 3px",
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+                  gap: "16px",
+                  marginTop: 2,
+                  marginBottom: 2,
+                  marginX: 2,
                 }}
               >
-                {filteredProducts.map((product, index) => (
-                  <UiProductCard
-                    key={index} // Providing index as the key
-                    product={product} // Pass the entire product object
-                  />
+                {sortedProducts.map((product, index) => (
+                  <Box key={index} sx={{ marginBottom: "16px" }}>
+                    <UiProductCard product={product} />
+                  </Box>
                 ))}
               </Box>
             </Grid>
@@ -173,7 +200,7 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({ category }) => {
         </Box>
 
         {/* Pagination */}
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', my: 5}}>
+        <Box sx={{ display: "flex", justifyContent: "flex-end", my: 5 }}>
           <UiPagingation />
         </Box>
       </Container>
@@ -182,3 +209,4 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({ category }) => {
 };
 
 export default BodyComponents;
+

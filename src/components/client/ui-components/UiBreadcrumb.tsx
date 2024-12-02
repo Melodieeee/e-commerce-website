@@ -5,20 +5,12 @@ import Link from "@mui/material/Link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useEffect, useState } from "react";
 import { ProductCategories } from "@/test-data/DemoComponents";
+import { IProductCategory } from "@/lib/models/interfaces/IProductCategory";
+import { IProduct } from "@/lib/models/interfaces/IProduct";
 
-interface Category {
-  categoryId: string;
-  name: string;
-  description: string;
-  children: string[];
-}
 
 interface ProductBreadcrumbsProps {
-  product: {
-    productId: string;
-    defaultCategoryIds: string[];
-    productName: string;
-  };
+  product: IProduct;
 }
 
 interface CategoryBreadcrumbsProps {
@@ -33,7 +25,7 @@ const ProductBreadcrumbs: React.FC<ProductBreadcrumbsProps> = ({ product }) => {
       // Find category hierarchy based on productCategoryIds
       const categoryHierarchy = product.defaultCategoryIds.map((categoryId) => {
         const category = ProductCategories.find(
-          (cat: Category) => cat.categoryId === categoryId
+          (cat: IProductCategory) => cat.categoryId === categoryId
         );
         return category ? category : categoryId;
       });
@@ -91,7 +83,7 @@ const CategoryBreadcrumbs: React.FC<CategoryBreadcrumbsProps> = ({
 
   useEffect(() => {
     if (mCategoryId && ProductCategories.length > 0) {
-      const categoryHierarchy: Category[] = [];
+      const categoryHierarchy: IProductCategory[] = [];
 
       // Find the category object with the matching categoryName
       const currentCategory = ProductCategories.find(
@@ -108,7 +100,7 @@ const CategoryBreadcrumbs: React.FC<CategoryBreadcrumbsProps> = ({
           // Find the parent category
           parentCategory = ProductCategories.find((category) =>
             category.children.includes(parentCategory.categoryId)
-          ) as Category;
+          ) as IProductCategory;
         }
       }
 

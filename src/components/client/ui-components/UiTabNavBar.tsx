@@ -40,7 +40,7 @@ export default function TabNavBar({ productCategories }: TabNavBarProps) {
     setMenuAnchorEl(null);
   };
 
-  const allChildren =
+  const allChildrenIds =
     productCategories.find((item) => item.categoryId === "all")?.children ?? [];
 
   return (
@@ -50,7 +50,7 @@ export default function TabNavBar({ productCategories }: TabNavBarProps) {
     >
       <div className="flex max-w-container mx-auto w-full">
         {productCategories.map((item, index) => {
-          if (allChildren.includes(item.categoryId)) {
+          if (allChildrenIds.includes(item.categoryId)) {
             return (
               <div
                 key={item.categoryId}
