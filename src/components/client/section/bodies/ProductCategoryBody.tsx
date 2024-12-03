@@ -45,6 +45,7 @@ const getSelfAndChildrenCategoryIds = (
 };
 
 const StyledSelect = styled(Select)({
+  fontFamily: "inherit",
   border: "1px solid #ccc",
   borderRadius: "4px",
   background: "white",
@@ -155,10 +156,10 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({ category }) => {
             onChange={handleSortChange}
             IconComponent={ExpandMoreIcon}
           >
-            <MenuItem value="best-seller">Best Seller</MenuItem>
-            <MenuItem value="popularity">Popularity</MenuItem>
-            <MenuItem value="price">Price</MenuItem>
-            <MenuItem value="product-name">Product Name</MenuItem>
+            <MenuItem value="best-seller" sx={{ fontFamily: "inherit" }}>Best Seller</MenuItem>
+            <MenuItem value="popularity" sx={{ fontFamily: "inherit" }}>Popularity</MenuItem>
+            <MenuItem value="price" sx={{ fontFamily: "inherit" }}>Price</MenuItem>
+            <MenuItem value="product-name" sx={{ fontFamily: "inherit" }}>Product Name</MenuItem>
           </StyledSelect>
           <IconButton onClick={handleArrowClick} aria-label="toggle-arrow-icon">
             {isUp ? <ArrowUpward /> : <ArrowDownward />}

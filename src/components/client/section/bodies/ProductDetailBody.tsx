@@ -185,7 +185,7 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
     }
     if (
       Object.values(addItem.customChoices).some(
-        (choice) => choice.selectionName === "invalid size"
+        (choice) => choice.customChoice === "invalid size"
       )
     ) {
       alert("Please enter a valid size.");
@@ -193,7 +193,7 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
     }
     if (
       Object.values(addItem.customChoices).some(
-        (choice) => choice.selectionName === ""
+        (choice) => choice.customChoice === ""
       )
     ) {
       alert("Please enter some custom text.");
@@ -210,12 +210,12 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
     // saveCartItems(updatedItems);
     addCartItem(addItem);
     setIsCartDrawerOpen(true);
-    alert(JSON.stringify(selectedOptions));
+    //alert(JSON.stringify(selectedOptions));
   };
 
   const [inputValue, setInputValue] = useState<string>("");
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSpecTxtChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
@@ -264,7 +264,7 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
               {/* RightSide */}
               <Grid item xs={12} sm={7}>
                 {/* Product name and SKU */}
-                <Container sx={{ py: 2}}>
+                <Container sx={{ py: 2 }}>
                   <Box sx={{ my: 2, px: 3, py: 1 }}>
                     <Typography
                       sx={{ fontWeight: "bold" }}
@@ -274,25 +274,23 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                       {product.productName}
                     </Typography>
 
-                    <Typography
-                      variant="body2"
-                      sx={{ mt: 2, fontSize: 12 }}
-                    >
+                    <Typography variant="body2" sx={{ mt: 2, fontSize: 12 }}>
                       {product.sku}
                     </Typography>
                     <Divider sx={{ my: 4 }} />
                   </Box>
 
                   {/* Product Options */}
-                  <Box sx={{ }}>
+                  <Box sx={{}}>
                     {product.attributes.map((attribute, index) => (
-                      <ProductEditAttributeSection
+                      <ProductEditAttributeSection // Replace ProductAttributeSection with ProductEditAttributeSection
                         key={index}
                         attribute={attribute}
                         handleSelectionChange={handleSelectionChange}
                       />
                     ))}
                   </Box>
+                  {/* Specific Instruction */}
                   <Container sx={{ my: 2 }}>
                     <Typography variant="h6" gutterBottom>
                       Specific Instructions (Optional)
@@ -301,7 +299,7 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                       id="specific-instruction-textfield"
                       hiddenLabel
                       value={inputValue}
-                      onChange={handleChange}
+                      onChange={handleSpecTxtChange}
                       multiline
                       variant="filled"
                       rows={3}
@@ -315,6 +313,7 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                       }}
                     />
                   </Container>
+                  {/* Bulk Discount */}
                   {product.bulkDiscounts.length > 0 && (
                     <Container sx={{ my: 2 }}>
                       <Typography variant="h6" gutterBottom>
@@ -333,6 +332,7 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                       </Box>
                     </Container>
                   )}
+                  {/* File Upload */}
                   {product.isUploadFiles && (
                     <Container sx={{ my: 2 }}>
                       <Typography variant="h6" gutterBottom>
@@ -386,14 +386,6 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                       )}
                     </Container>
                   )}
-                  {/* Subtotal */}
-                  <Container sx={{ my: 2 }}>
-
-
-                    <Typography variant="body2">
-                      {JSON.stringify(selectedOptions)}
-                    </Typography>
-                  </Container>
 
                   {/* Subtotal */}
                   <Box
@@ -403,9 +395,10 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                       justifyContent: "space-between",
                       border: "1px solid #e0e0e0",
                       borderRadius: "8px",
-                      padding: "16px",
+                      py: 2,
                       px: 4,
-                      my: 2
+                      my: 4,
+                      mx: 3,
                     }}
                   >
                     {/* Price and Discount Section */}
@@ -423,72 +416,77 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                       <Typography variant="body2" color="textSecondary">
                         (Excl. of Tax)
                       </Typography>
-                      <Box
-                        sx={{ display: "flex", alignItems: "center", mt: 1 }}
-                      >
-                        <Typography
-                          variant="body1"
-                          sx={{
-                            textDecoration: "line-through",
-                            color: "gray",
-                            mr: 2,
-                          }}
-                        >
-                          ${(unitPrice * quantity).toFixed(2)}
-                        </Typography>
-                        
+                      {(product.promoPercentageOff > 0 ||
+                        bulkDiscountPercentageOff > 0) && (
                         <Box
-                          sx={{
-                            backgroundColor: "#4caf50",
-                            color: "#fff",
-                            padding: "4px 8px",
-                            borderRadius: "4px",
-                            fontWeight: "bold",
-                          }}
+                          sx={{ display: "flex", alignItems: "center", mt: 1 }}
                         >
-                          Save {product.promoPercentageOff}%
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              textDecoration: "line-through",
+                              color: "gray",
+                              mr: 2,
+                            }}
+                          >
+                            ${(unitPrice * quantity).toFixed(2)}
+                          </Typography>
+                          {product.promoPercentageOff > 0 && (
+                            <Box
+                              sx={{
+                                backgroundColor: "#4caf50",
+                                color: "#fff",
+                                padding: "4px 8px",
+                                borderRadius: "4px",
+                                fontWeight: "bold",
+                              }}
+                            >
+                              Save {product.promoPercentageOff}%
+                            </Box>
+                          )}
+                          {bulkDiscountPercentageOff > 0 && (
+                            <Box
+                              sx={{
+                                backgroundColor: "#4caf50",
+                                color: "#fff",
+                                padding: "4px 8px",
+                                borderRadius: "4px",
+                                fontWeight: "bold",
+                                ml: 1,
+                              }}
+                            >
+                              Bulk Save {bulkDiscountPercentageOff}%
+                            </Box>
+                          )}
                         </Box>
-                        { bulkDiscountPercentageOff > 0 && (
-                          <Box
-                          sx={{
-                            backgroundColor: "#4caf50",
-                            color: "#fff",
-                            padding: "4px 8px",
-                            borderRadius: "4px",
-                            fontWeight: "bold",
-                            ml: 1
-                          }}
-                        >
-                          Bulk Save {bulkDiscountPercentageOff}%
-                        </Box>
-                        )}
-                        
-                      </Box>
+                      )}
                     </Box>
 
                     {/* Quantity Control Section */}
                     <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <QuantityInput
-                      initialValue={quantity}
-                      onChange={handleQuantityChange}
-                    />
+                      <QuantityInput
+                        initialValue={quantity}
+                        onChange={handleQuantityChange}
+                      />
                     </Box>
 
-                    {/* Add to Cart Button */}                    
+                    {/* Add to Cart Button */}
                     <Button
                       variant="contained"
                       color="primary"
                       size="large"
                       onClick={handleAddToCart}
-                      sx={{ borderRadius: 2 ,fontWeight: "bold", fontFamily: 'inherit'}}
+                      sx={{
+                        borderRadius: 2,
+                        fontWeight: "bold",
+                        fontFamily: "inherit",
+                      }}
                     >
                       Add to Cart
                     </Button>
                   </Box>
                 </Container>
               </Grid>
-
-              <Grid item xs={12} sm={12}></Grid>
             </Grid>
           </Box>
         </Container>

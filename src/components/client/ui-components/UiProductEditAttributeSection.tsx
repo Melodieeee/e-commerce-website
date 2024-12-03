@@ -158,8 +158,9 @@ const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = 
             }}
           >
             {/* custom text */}
+            
             {selection.selectionName === "Custom Text" ? (
-              <TextField
+             <> <TextField
                 hiddenLabel
                 id={`custom-text-textfield-${attribute.optionName}`}
                 multiline
@@ -177,6 +178,18 @@ const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = 
                   overflowY: "auto", // Enable vertical scrolling if needed
                 }}
               />
+              {index === selectedCardIndex &&
+                  textFieldValues[index]?.trim() === "" && (
+                    <Typography
+                      variant="body2"
+                      align="left"
+                      sx={{ color: "#FF0000" }}
+                      gutterBottom
+                    >
+                      {"Please enter your custom text"}
+                    </Typography>
+                  )}
+              </>
             ) : // custom color
             selection.selectionName === "Custom Color" ? (
               <ColorPicker

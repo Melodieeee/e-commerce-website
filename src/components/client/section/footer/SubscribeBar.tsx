@@ -37,7 +37,7 @@ export default function SubscribeBar() {
             size="md"
             placeholder="Enter your email address"
             endDecorator={
-              <Button variant="soft" size="lg" color="primary">
+              <Button sx={{ fontFamily: "inherit" }} variant="soft" size="lg" color="primary">
                 Subscribe
               </Button>
             }
@@ -47,6 +47,7 @@ export default function SubscribeBar() {
                 md: '60%', 
                 lg: '400px' 
               },
+              fontFamily: "inherit", 
               '--Input-radius': `${radius}px`,
               '--Input-decoratorChildHeight': `${childHeight}px`,
               mx: 2 

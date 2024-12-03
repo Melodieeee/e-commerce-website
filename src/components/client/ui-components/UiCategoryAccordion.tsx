@@ -26,15 +26,13 @@ const CustomAccordion = styled(Accordion)(({ theme }) => ({
   },
 }));
 
-
-const UiCategoryAccordion: React.FC<CustomAccordionProps> = ( { category }) => {
-  
+const UiCategoryAccordion: React.FC<CustomAccordionProps> = ({ category }) => {
   const allChildrenIds =
-  ProductCategories.find((item) => item.categoryId === category.categoryId)?.children ?? [];
+    ProductCategories.find((item) => item.categoryId === category.categoryId)
+      ?.children ?? [];
 
   return (
     <div>
-      
       <CustomAccordion disabled={allChildrenIds.length === 0}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -43,20 +41,22 @@ const UiCategoryAccordion: React.FC<CustomAccordionProps> = ( { category }) => {
         >
           <Typography>Category</Typography>
         </AccordionSummary>
-        <AccordionDetails> 
-          {ProductCategories.map((category) => { // children categories
+        <AccordionDetails>
+          {ProductCategories.map((category) => {
+            // children categories
             if (allChildrenIds.includes(category.categoryId)) {
               return (
                 <Button
-                fullWidth // Makes the button occupy the whole row
-                variant="text"
-                size="small"
-                sx={{
-                  justifyContent: "flex-start", // Aligns content to the left
-                  textAlign: "left", // Ensures the text inside the button is aligned to the left
-                  borderBottom: "1px solid #ddd", // Adds a bottom border for separation
-                  padding: "8px 16px", // Adjusts padding for better alignment
-                }}
+                  fullWidth // Makes the button occupy the whole row
+                  variant="text"
+                  size="small"
+                  sx={{
+                    fontFamily: "inherit",
+                    justifyContent: "flex-start", // Aligns content to the left
+                    textAlign: "left", // Ensures the text inside the button is aligned to the left
+                    borderBottom: "1px solid #ddd", // Adds a bottom border for separation
+                    padding: "8px 16px", // Adjusts padding for better alignment
+                  }}
                   onClick={() => {
                     window.location.href = `/client/product-category/${category.name
                       .toLowerCase()

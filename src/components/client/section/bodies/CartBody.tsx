@@ -13,6 +13,9 @@ import {
   Stack,
   Typography,
   Link,
+  Card,
+  CardMedia,
+  CardContent,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -27,6 +30,8 @@ import QuantityInput from "@/components/client/ui-components/UiQuantityInput";
 import { ICartItem } from "@/lib/models/interfaces/ICartItem";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useCart } from "@/context/CartContext";
+
+import { Add, Remove, Edit, Delete } from "@mui/icons-material";
 
 const BodyComponents = () => {
   const router = useRouter();
@@ -91,7 +96,8 @@ const BodyComponents = () => {
           alignItems="center"
         >
           <Typography variant="h5" fontWeight="fontWeightBold">
-            Your Cart: {cartItems.reduce((total, item) => total + item.quantity, 0)} items
+            Your Cart:{" "}
+            {cartItems.reduce((total, item) => total + item.quantity, 0)} items
           </Typography>
           <Tooltip title="Delete All">
             <IconButton size="large" onClick={handleDeleteAllClick}>
@@ -103,126 +109,214 @@ const BodyComponents = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
             {cartItems.map((item, index) => (
-              <ListItem key={index}>
-                <Container
+              <Card
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  p: 2,
+                  mb: 2,
+                  mx: 2,
+                }}
+              >
+                {/* Left Section: Image */}
+                <CardMedia
+                  component="img"
+                  sx={{ width: 120, borderRadius: 2 }}
+                  image={item.product.productPics[0]}
+                  alt={item.product.productName}
+                />
+                {/* Middle Section: Product Details */}
+                <CardContent sx={{ flex: 1, mx: 2 }}>
+                  <Typography variant="h6">
+                    {item.product.productName}
+                  </Typography>
+                  {/* <Typography variant="body2" color="text.secondary">
+                      {JSON.stringify(item.customChoices)}</Typography> */}
+
+                  {Object.keys(item.customChoices).map((key) => {
+                    const choice = item.customChoices[key];
+                    if (
+                      choice.selectionName === "Custom Size" ||
+                      choice.selectionName === "Custom Color" ||
+                      choice.selectionName === "Custom Text"
+                    ) {
+                      return (
+                        <Typography
+                          key={key}
+                          variant="body2"
+                          color="text.secondary"
+                        >
+                          {key}: {choice.customChoice}
+                        </Typography>
+                      );
+                    } else {
+                      return (
+                        <Typography
+                          key={key}
+                          variant="body2"
+                          color="text.secondary"
+                        >
+                          {key}: {choice.selectionName}
+                        </Typography>
+                      );
+                    }
+                  })}
+
+                  {item.customPics.length > 0 && (
+                    <>
+                      <Typography variant="body2" color="text.secondary">
+                        Custom Pic: {item.customPics.length} file(s)
+                      </Typography>
+                      {item.customPics.map((fileInfo, index) => (
+                        <Typography
+                          key={index}
+                          variant="body2"
+                          color="text.secondary"
+                        >
+                          <Link
+                            style={{ cursor: "pointer" }}
+                            onClick={() => window.open(fileInfo.url, "_blank")}
+                          >
+                            {fileInfo.name}
+                          </Link>
+                        </Typography>
+                      ))}
+                    </>
+                  )}
+
+                  {item.specificInstruction && (
+                    <Typography
+                      color="text.secondary"
+                      variant="body2"
+                      component="span"
+                      sx={{ fontStyle: "italic" }}
+                    >
+                      Specific Instruction: {item.specificInstruction}
+                    </Typography>
+                  )}
+
+                  <Typography variant="body2" color="text.secondary">
+                    Unit Price: ${item.unitPrice}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Estimated delivery: Wed, Dec 18th 2024
+                  </Typography>
+                </CardContent>
+
+                {/* Right Section: Actions */}
+                <Box
                   sx={{
-                    border: "1px solid black",
-                    padding: "1rem",
-                    borderRadius: 4,
+                    my: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-end",
+                    justifyContent: "space-between",
                   }}
                 >
-                  <Stack direction="column" spacing={1}>
-                    <Grid container spacing={1}>
-                      <Grid item xs={2} sm={4} md={2} lg={2} xl={2}>
-                        <Box>
-                          <img
-                            src={item.product.productPics[0]}
-                            alt={item.product.productName}
-                            style={{ width: 100, height: 100 }}
-                          />
-                        </Box>
-                      </Grid>
-                      <Grid item xs={10} sm={8} md={10} lg={10} xl={10}>
-                        <Box>
-                          <ListItemText
-                            primary={`${item.product.productName}`}
-                          />
-                          <ListItemText primary={`$${item.unitPrice}`} />
-                          <ListItemText
-                            primary={`Bulk Discount: ${item.bulkDiscountPercentageOff}% off`}
-                          />
-                          <ListItemText
-                            primary={`Promotion: ${item.promoPercentageOff}% off`}
-                          />
-                          <ListItemText
-                            primary={`Quantity: ${item.quantity}`}
-                          />
-                          <ListItemText primary={`$${item.subtotal}`} />
-                          {Object.keys(item.customChoices).map((key, index) => {
-                            const choice = item.customChoices[key];
-                            if (
-                              choice.selectionName === "Custom Size" ||
-                              choice.selectionName === "Custom Color" ||
-                              choice.selectionName === "Custom Text"
-                            ) {
-                              return (
-                                <ListItemText
-                                  key={index}
-                                  primary={`${key}: ${choice.customChoice}`}
-                                />
-                              );
-                            } else {
-                              return (
-                                <ListItemText
-                                  key={index}
-                                  primary={`${key}: ${choice.selectionName}`}
-                                />
-                              );
-                            }
-                          })}
+                  {/* Quantity Selector */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <QuantityInput
+                      initialValue={item.quantity}
+                      onChange={(value) => {
+                        handleQuantityChange(index, value);
+                      }}
+                    />
+                  </Box>
 
-                          {item.customPics.length > 0 && (
-                            <>
-                              <ListItemText
-                                primary={`Custom Pic: ${item.customPics.length} file(s)`}
-                              />
-                              {item.customPics.map((fileInfo, index) => (
-                                <ListItemText key={index}>
-                                  <Link
-                                    style={{ cursor: "pointer" }}
-                                    onClick={() =>
-                                      window.open(fileInfo.url, "_blank")
-                                    }
-                                  >
-                                    {fileInfo.name}
-                                  </Link>
-                                </ListItemText>
-                              ))}
-                            </>
-                          )}
+                  {/* Price and Discount Section */}
+                  <Box sx={{ display: "flex", flexDirection: "column", pr: 4 }}>
+  {/* Price Total */}
+  <Typography variant="h5" sx={{ fontWeight: "bold", textAlign: "right" }}>
+    $
+    {(
+      (((item.unitPrice * (100 - item.promoPercentageOff)) /
+        100) *
+        item.quantity *
+        (100 - item.bulkDiscountPercentageOff)) /
+      100
+    ).toFixed(2)}
+  </Typography>
+  <Typography variant="body2" color="textSecondary" sx={{ textAlign: "right" }}>
+    (Excl. of Tax)
+  </Typography>
 
-                          {item.specificInstruction && (
-                            <ListItemText
-                              primary={
-                                <Typography
-                                  component="span"
-                                  sx={{ fontStyle: "italic" }}
-                                >
-                                  Specific Instruction:{" "}
-                                  {item.specificInstruction}
-                                </Typography>
-                              }
-                            />
-                          )}
-                        </Box>
-                      </Grid>
-                    </Grid>
+  {(item.promoPercentageOff > 0 || item.bulkDiscountPercentageOff > 0) && (
+    <Box sx={{ display: "flex", flexDirection: "column", mt: 1 }}>
+      {/* delete old price */}
+      <Typography
+        variant="body1"
+        sx={{
+          textDecoration: "line-through",
+          color: "gray",
+          mr: 2,
+          textAlign: "right",
+        }}
+      >
+        ${(item.unitPrice * item.quantity).toFixed(2)}
+      </Typography>
 
-                    <Stack direction="row" spacing={2}>
-                      <QuantityInput
-                        initialValue={item.quantity}
-                        onChange={(value) => {
-                          handleQuantityChange(index, value);
-                        }}
-                      />
+      {/* save tags */}
+      <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 1 }}>
+        {item.promoPercentageOff > 0 && (
+          <Box
+            sx={{
+              backgroundColor: "#4caf50",
+              color: "#fff",
+              padding: "2px 6px",
+              borderRadius: "4px",
+              fontWeight: "bold",
+              fontSize: "0.75rem",
+            }}
+          >
+            Save {item.promoPercentageOff}%
+          </Box>
+        )}
+        {item.bulkDiscountPercentageOff > 0 && (
+          <Box
+            sx={{
+              backgroundColor: "#4caf50",
+              color: "#fff",
+              padding: "2px 6px",
+              borderRadius: "4px",
+              fontWeight: "bold",
+              fontSize: "0.75rem",
+              ml: 1,
+            }}
+          >
+            Bulk Save {item.bulkDiscountPercentageOff}%
+          </Box>
+        )}
+      </Box>
+    </Box>
+  )}
+</Box>
 
-                      <Tooltip title="Edit">
-                        <IconButton onClick={() => handleEditClick(index)}>
-                          <EditIcon />
-                        </IconButton>
-                      </Tooltip>
 
-                      <Tooltip title="Delete">
-                        <IconButton onClick={() => handleDeleteClick(index)}>
-                          <DeleteIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </Stack>
-                  </Stack>
-                </Container>
-              </ListItem>
+                  {/* Buttons */}
+                  <Box sx={{ display: "flex", mr: 4, mt: 1 }}>
+                    <Tooltip title="Edit">
+                      <IconButton onClick={() => handleEditClick(index)}>
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
+
+                    <Tooltip title="Delete">
+                      <IconButton onClick={() => handleDeleteClick(index)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                </Box>
+              </Card>
             ))}
           </Grid>
+
+          {/* Order Summary */}
           <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
             <Box
               sx={{
@@ -231,10 +325,19 @@ const BodyComponents = () => {
                 width: "100%",
                 marginY: 1,
                 paddingX: 3,
-              }}>
-                <Typography variant="h5">ORDER SUMMARY</Typography>
-              </Box>
-              <Divider sx={{ height: 3, width: '95%', margin: '0 auto', marginBottom: 2, backgroundColor: 'black' }} />
+              }}
+            >
+              <Typography variant="h5">ORDER SUMMARY</Typography>
+            </Box>
+            <Divider
+              sx={{
+                height: 3,
+                width: "95%",
+                margin: "0 auto",
+                marginBottom: 2,
+                backgroundColor: "black",
+              }}
+            />
             <Box
               sx={{
                 display: "flex",
@@ -243,7 +346,7 @@ const BodyComponents = () => {
                 marginY: 1,
                 paddingX: 3,
               }}
-            >          
+            >
               <Box alignItems="center" sx={{ display: "flex" }}>
                 <Typography variant="h6">Subtotal</Typography>
                 <Tooltip title="before tax and shipping fee">
@@ -288,7 +391,7 @@ const BodyComponents = () => {
               <Typography variant="h6">$0.00</Typography>
             </Box>
 
-            <Divider sx={{ height: 2, width: '90%', margin: '0 auto' }}/>
+            <Divider sx={{ height: 2, width: "90%", margin: "0 auto" }} />
 
             <Box
               sx={{

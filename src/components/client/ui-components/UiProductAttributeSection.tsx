@@ -10,12 +10,12 @@ import {
 import { useEffect, useState } from "react";
 import ColorPicker from "@/components/client/ui-components/UiColorPicker";
 import SizeInput from "@/components/client/ui-components/UiSizeInput";
-import { Selection } from "@/lib/models/interfaces/ISelection";
-import { Attribute } from "@/lib/models/interfaces/IAttribute";
+import { ISelection } from "@/lib/models/interfaces/ISelection";
+import { IAttribute } from "@/lib/models/interfaces/IAttribute";
 
 interface ProductAttributeSectionProps {
-  attribute: Attribute;
-  handleSelectionChange: (optionName: string, selection: Selection) => void; // Add handleSelectionChange prop
+  attribute: IAttribute;
+  handleSelectionChange: (optionName: string, selection: ISelection) => void; // Add handleSelectionChange prop
 }
 
 const ProductAttributeSection: React.FC<ProductAttributeSectionProps> = ({
@@ -94,7 +94,6 @@ const ProductAttributeSection: React.FC<ProductAttributeSectionProps> = ({
       attribute.selections[index].selectionName == "Custom Size"
     ) {
       setSelectedCardIndex(index);
-      
     } else {
       setSelectedCardIndex(index);
       const selection = attribute.selections[index];
@@ -112,7 +111,7 @@ const ProductAttributeSection: React.FC<ProductAttributeSectionProps> = ({
 
   return (
     <Container sx={{ mt: 3 }}>
-      <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }} gutterBottom>
+      <Typography variant="subtitle1" sx={{ fontWeight: "bold" }} gutterBottom>
         {attribute.optionName}
       </Typography>
 
@@ -134,25 +133,38 @@ const ProductAttributeSection: React.FC<ProductAttributeSectionProps> = ({
           >
             {/* custom text */}
             {selection.selectionName === "Custom Text" ? (
-              <TextField
-                hiddenLabel
-                id={`custom-text-textfield-${attribute.optionName}`}
-                defaultValue=""
-                multiline
-                variant="filled"
-                rows={3}
-                value={textFieldValues[index] || ""} // Bind value to state
-                onChange={(e) => handleTextFieldChange(index, e.target.value)} // Update state on change
-                sx={{
-                  width: "100%", // Set width to match its container
-                  border:
-                    index === selectedCardIndex
-                      ? `2px solid ${theme.palette.secondary.main}`
-                      : "2px solid transparent",
-                  borderRadius: "5px",
-                  overflowY: "auto", // Enable vertical scrolling if needed
-                }}
-              />
+              <>
+                <TextField
+                  hiddenLabel
+                  id={`custom-text-textfield-${attribute.optionName}`}
+                  defaultValue=""
+                  multiline
+                  variant="filled"
+                  rows={3}
+                  value={textFieldValues[index] || ""} // Bind value to state
+                  onChange={(e) => handleTextFieldChange(index, e.target.value)} // Update state on change
+                  sx={{
+                    width: "100%", // Set width to match its container
+                    border:
+                      index === selectedCardIndex
+                        ? `2px solid ${theme.palette.secondary.main}`
+                        : "2px solid transparent",
+                    borderRadius: "5px",
+                    overflowY: "auto", // Enable vertical scrolling if needed
+                  }}
+                />
+                {index === selectedCardIndex &&
+                  textFieldValues[index]?.trim() === "" && (
+                    <Typography
+                      variant="body2"
+                      align="left"
+                      sx={{ color: "#FF0000" }}
+                      gutterBottom
+                    >
+                      {"Please enter your custom text"}
+                    </Typography>
+                  )}
+              </>
             ) : // custom color
             selection.selectionName === "Custom Color" ? (
               <ColorPicker
