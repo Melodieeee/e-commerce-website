@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import FormHelperText from '@mui/material/FormHelperText';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -107,6 +108,7 @@ const ProductListSwiper: React.FC<ProductListProps> = ({
         >
           <FormControl sx={{ minWidth: 230, margin: "auto" }} size="small">
             <Select
+              sx={{ fontFamily: "inherit" }}
               labelId="demo-select-small-label"
               id="demo-select-small"
               value={selectedCategory}
@@ -116,7 +118,7 @@ const ProductListSwiper: React.FC<ProductListProps> = ({
               {productCategories.map((item) => {
                 if (allChildren.includes(item.categoryId)) {
                   return (
-                    <MenuItem key={item.categoryId} value={item.categoryId}>
+                    <MenuItem sx={{ fontFamily: "inherit" }} key={item.categoryId} value={item.categoryId}>
                       {item.name}
                     </MenuItem>
                   );
@@ -141,10 +143,13 @@ const ProductListSwiper: React.FC<ProductListProps> = ({
             <FormControl sx={{ minWidth: 230 }} size="small">
               <Select
                 labelId="demo-select-child-label"
+                defaultValue=""
                 id="demo-select-child"
                 value={selectedChildCategory}
                 onChange={handleChildCategoryChange}
+                sx={{ fontFamily: "inherit" }}
               >
+              
                 {selectedProductChildren.map((childId) => {
                   const childCategory = productCategories.find(
                     (item) => item.categoryId === childId
@@ -152,6 +157,7 @@ const ProductListSwiper: React.FC<ProductListProps> = ({
                   if (childCategory) {
                     return (
                       <MenuItem
+                      sx={{ fontFamily: "inherit" }}
                         key={childCategory.categoryId}
                         value={childCategory.categoryId}
                       >
@@ -162,6 +168,7 @@ const ProductListSwiper: React.FC<ProductListProps> = ({
                   return null;
                 })}
               </Select>
+          
             </FormControl>
           </Grid>
         )}
@@ -179,6 +186,7 @@ const ProductListSwiper: React.FC<ProductListProps> = ({
           >
             <FormControl className="min-w-full sm:min-w-230" sx={{ minWidth: 230 }} size="small">
               <Select
+              sx={{ fontFamily: "inherit" }}
                 labelId="demo-select-subchild-label"
                 id="demo-select-subchild"
                 value={selectedSubChildCategory}
@@ -191,6 +199,7 @@ const ProductListSwiper: React.FC<ProductListProps> = ({
                   if (subChildCategory) {
                     return (
                       <MenuItem
+                      sx={{ fontFamily: "inherit" }}
                         key={subChildCategory.categoryId}
                         value={subChildCategory.categoryId}
                       >
@@ -206,7 +215,7 @@ const ProductListSwiper: React.FC<ProductListProps> = ({
         )}
       </Grid>
       <Swiper
-      
+        
         slidesPerView={4}
         spaceBetween={30}
         navigation={true}
@@ -220,18 +229,20 @@ const ProductListSwiper: React.FC<ProductListProps> = ({
           },
           640: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            spaceBetween: 10,
           },
           768: {
             slidesPerView: 3,
-            spaceBetween: 30,
+            spaceBetween: 20,
           },
           1024: {
             slidesPerView: 4,
-            spaceBetween: 30,
+            spaceBetween: 20,
           },
         }}
-        style={{ marginTop: '40px' }}
+        style={{marginTop: "40px",paddingLeft: "50px"
+          , paddingRight: "50px", paddingBottom: "10px", paddingTop: "10px"}}
+        
       >
         {displayProducts.map((product) => (
           <SwiperSlide

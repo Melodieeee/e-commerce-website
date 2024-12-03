@@ -72,7 +72,11 @@ const BodyComponents = () => {
     setTimeout(() => {
       setIsCheckoutLoading(false);
     }, 2000);
-
+    if (cartItems.length === 0) {
+      setIsCheckoutLoading(false);
+      alert("Your cart is empty!");
+      return;
+    }
     // Redirect to checkout page
     router.push("/client/checkout/sessionNumber");
   };

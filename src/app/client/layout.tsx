@@ -3,6 +3,7 @@ import "@/app/client/clientStyle.css";
 import React, { useEffect } from 'react';
 import { CartProvider } from '@/context/CartContext';
 
+
 interface RootLayoutProps {
   children: React.ReactNode;
 }

@@ -37,6 +37,7 @@ const InputFileUpload: React.FC<InputFileUploadProps> = ({ onFilesSelected, butt
       tabIndex={-1}
       startIcon={<CloudUploadIcon />}
       disabled={disabled}
+      sx={{ textTransform: 'none', fontFamily: 'inherit' }}
     >
       {buttonText}
       <VisuallyHiddenInput type="file" accept="image/*" multiple onChange={handleFilesSelected} />

@@ -92,10 +92,10 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({ category }) => {
   
       switch (sort) {
         case "best-seller":
-          comparison = (b.sales || 0) - (a.sales || 0); // Fallback to 0 if sales is undefined
+          //comparison = (b.sales || 0) - (a.sales || 0); // Fallback to 0 if sales is undefined
           break;
         case "popularity":
-          comparison = (b.popularity || 0) - (a.popularity || 0); // Fallback to 0 if popularity is undefined
+          //comparison = (b.popularity || 0) - (a.popularity || 0); // Fallback to 0 if popularity is undefined
           break;
         case "price":
           comparison = (a.minSelection[1] || 0) - (b.minSelection[1] || 0); // Fallback to 0 if price is undefined

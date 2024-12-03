@@ -154,6 +154,7 @@ const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = 
                 selection.selectionName === "Custom Text"
                   ? "1 1 100%"
                   : "0 1 auto",
+              mx:1
             }}
           >
             {/* custom text */}
@@ -170,7 +171,7 @@ const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = 
                   width: "100%", // Set width to match its container
                   border:
                     index === selectedCardIndex
-                      ? `2px solid ${theme.palette.secondary.main}`
+                      ? `2px solid #000`
                       : "2px solid transparent",
                   borderRadius: "5px",
                   overflowY: "auto", // Enable vertical scrolling if needed
@@ -207,7 +208,7 @@ const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = 
                   alignItems: "center",
                   border:
                     index === selectedCardIndex
-                      ? `2px solid ${theme.palette.secondary.main}`
+                      ? `2px solid #000` //${theme.palette.secondary.main}
                       : "2px solid transparent",
                   cursor: "pointer",
                 }}

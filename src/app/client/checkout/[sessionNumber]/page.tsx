@@ -1,6 +1,6 @@
 // Route: /client/checkout/[sessionNumber]
 'use client';
-//import '@/app/globals.css';
+//import '@/globals.css';
 import React from 'react';
 import { useEffect } from "react";
 import Layout from "@/components/client/Layout";

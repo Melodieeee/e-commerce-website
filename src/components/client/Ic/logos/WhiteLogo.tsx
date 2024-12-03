@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import WhiteLogo from '/public/images/logos/WhiteLogo.png';
-
+import WhiteLogo from '/public/images/logos/logo.png';
+ 
 function LogoComponent() {
   return (
     <Link href="/client/" passHref>

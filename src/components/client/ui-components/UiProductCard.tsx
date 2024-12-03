@@ -72,7 +72,7 @@ const MultiActionAreaCard: React.FC<ProductCardProps> = ({ product }) => {
               marginTop: 0,
             }}
           >
-            <Button className="text-primary border-primary" variant="outlined" size="small" color="secondary">
+            <Button sx={{ fontFamily: "inherit" }} className="text-primary border-primary" variant="outlined" size="small" color="secondary">
               Customize
             </Button>
           </Box>

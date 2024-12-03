@@ -120,7 +120,7 @@ const HeaderMainContainer: React.FC<HeaderMainContainerProps> = ({
               placeholder="Search"
               endDecorator={<SearchIcon />}
               size="lg"
-              sx={{ width: "100%", minWidth: 0 }}
+              sx={{ width: "100%", minWidth: 0, fontFamily: "inherit" }}
             />
           </FormControl>
         </Box>
@@ -134,6 +134,7 @@ const HeaderMainContainer: React.FC<HeaderMainContainerProps> = ({
           aria-label="call us"
           className="flex-2 text-primary flex-grow xl:flex-grow-0"
           sx={{
+            fontFamily: "inherit",
             backgroundColor: "transparent",
             "&:hover": {
               backgroundColor: "transparent",
@@ -158,6 +159,7 @@ const HeaderMainContainer: React.FC<HeaderMainContainerProps> = ({
           aria-label="about us"
           className="flex-2 text-primary flex-grow xl:flex-grow-0"
           sx={{
+            fontFamily: "inherit",
             backgroundColor: "transparent",
             "&:hover": {
               backgroundColor: "transparent",

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ProductBreadcrumbs } from "@/components/client/ui-components/UiBreadcrumb";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
 import {
   Container,
   Box,
@@ -37,9 +39,7 @@ interface BodyComponentsProps {
 const BodyComponents: React.FC<BodyComponentsProps> = ({
   product,
   setIsCartDrawerOpen,
-  
 }) => {
-
   const [quantity, setQuantity] = useState<number>(1);
   const { addCartItem } = useCart();
 
@@ -199,12 +199,24 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
       alert("Please enter some custom text.");
       return;
     }
+    //if quantity is 0, do not save to cart
+    if (addItem.quantity === 0) {
+      alert("Please enter a valid quantity.");
+      return;
+    }
 
     // const existingItems = getCartItems();
     // const updatedItems = [...existingItems, addItem];
     // saveCartItems(updatedItems);
     addCartItem(addItem);
     setIsCartDrawerOpen(true);
+    alert(JSON.stringify(selectedOptions));
+  };
+
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
   };
 
   if (product) {
@@ -213,11 +225,13 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
         <Container className="max-w-container mx-auto">
           {/* Breadcrumbs */}
           <Box
-            style={{
+            sx={{
               display: "flex",
               flexWrap: "wrap",
               gap: "20px",
-              margin: "30px 0",
+              marginBottom: 2,
+              marginTop: 4,
+              marginX: 5,
             }}
           >
             <ProductBreadcrumbs product={product} />
@@ -228,39 +242,49 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
             <Grid container spacing={2}>
               {/* LeftSide */}
               <Grid item xs={12} sm={5}>
-                {/* Image */}
-                <Box>
-                  <SwiperProductImage productPics={product.productPics} />
-                </Box>
-                {/* Description */}
-                <Box sx={{mt: 5}}>
-                  <Typography variant="h6" component="h1" gutterBottom>
-                    Description
-                  </Typography>
-                  <Typography variant="body1">{product.description}</Typography>
+                <Box sx={{ mx: 4, py: 2, px: 2 }}>
+                  {/* Image */}
+                  <Box sx={{ my: 2 }}>
+                    {product.productPics && product.productPics.length > 0 && (
+                      <SwiperProductImage productPics={product.productPics} />
+                    )}
+                  </Box>
+                  {/* Description */}
+                  <Box sx={{ py: 3, my: 2 }}>
+                    <Typography variant="h6" component="h1" gutterBottom>
+                      Description
+                    </Typography>
+                    <Typography variant="body1">
+                      {product.description}
+                    </Typography>
+                  </Box>
                 </Box>
               </Grid>
 
               {/* RightSide */}
               <Grid item xs={12} sm={7}>
                 {/* Product name and SKU */}
-                <Container>
-                  <Box sx={{ml: 3}}>
-                    <Typography variant="h6" gutterBottom>
+                <Container sx={{ py: 2}}>
+                  <Box sx={{ my: 2, px: 3, py: 1 }}>
+                    <Typography
+                      sx={{ fontWeight: "bold" }}
+                      variant="h4"
+                      gutterBottom
+                    >
                       {product.productName}
                     </Typography>
 
                     <Typography
                       variant="body2"
-                      sx={{ mt: 2, mb: 2, fontSize: 12 }}
+                      sx={{ mt: 2, fontSize: 12 }}
                     >
                       {product.sku}
                     </Typography>
-                    <Divider />
+                    <Divider sx={{ my: 4 }} />
                   </Box>
 
                   {/* Product Options */}
-                  <Box>
+                  <Box sx={{ }}>
                     {product.attributes.map((attribute, index) => (
                       <ProductEditAttributeSection
                         key={index}
@@ -276,13 +300,16 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                     <TextField
                       id="specific-instruction-textfield"
                       hiddenLabel
-                      defaultValue=""
+                      value={inputValue}
+                      onChange={handleChange}
                       multiline
                       variant="filled"
                       rows={3}
                       sx={{
                         width: "100%",
-                        border: `2px solid ${useTheme().palette.primary.main}`,
+                        border: inputValue
+                          ? `2px solid #000`
+                          : "2px solid transparent", // Border black if text is entered, else transparent
                         borderRadius: "5px",
                         overflowY: "auto",
                       }}
@@ -311,7 +338,7 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                       <Typography variant="h6" gutterBottom>
                         Upload Art Works
                       </Typography>
-                      <Typography variant="body1">
+                      <Typography variant="body2" sx={{ my: 1 }}>
                         &lt;=400MB per image file, no more than 5 files
                       </Typography>
                       <InputFileUpload
@@ -322,18 +349,26 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                         disabled={uploadedFiles.length >= 5}
                       />
                       {uploadedFiles.length === 0 ? (
-                        <Typography variant="body1">
+                        <Typography
+                          variant="body2"
+                          sx={{ ml: 1, my: 1, color: "#FF0000" }}
+                        >
                           You haven't uploaded any art works yet.
                         </Typography>
                       ) : (
                         <>
-                          <Typography variant="body1">
+                          <Typography
+                            variant="body2"
+                            sx={{ ml: 1, my: 1, color: "#999" }}
+                          >
                             {uploadedFiles.length} file(s) selected
                           </Typography>
                           <ul>
                             {uploadedFiles.map((file, index) => (
                               <li key={index}>
                                 <Link
+                                  variant="body2"
+                                  sx={{ ml: 1, color: "#999" }}
                                   style={{ cursor: "pointer" }}
                                   onClick={() => handleFileClick(file)}
                                 >
@@ -351,46 +386,105 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                       )}
                     </Container>
                   )}
-                  <Container sx={{ border: 1, my: 2 }}>
-                    <Typography variant="h6" gutterBottom>
-                      Subtotal
-                    </Typography>
-                    <Typography variant="body1">
-                      Original: ${(unitPrice * quantity).toFixed(2)}
-                    </Typography>
-                    <Typography variant="body1">
-                      Save {product.promoPercentageOff}% Bulk Save{" "}
-                      {bulkDiscountPercentageOff}%
-                    </Typography>
-                    <Typography variant="body1">
-                      Discounted Price: $
-                      {(
-                        (((unitPrice * (100 - product.promoPercentageOff)) /
-                          100) *
-                          quantity *
-                          (100 - bulkDiscountPercentageOff)) /
-                        100
-                      ).toFixed(2)}
-                    </Typography>
+                  {/* Subtotal */}
+                  <Container sx={{ my: 2 }}>
 
-                    <QuantityInput
-                      initialValue={quantity}
-                      onChange={handleQuantityChange}
-                    />
-
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleAddToCart}
-                      sx={{ borderRadius: 5 }}
-                    >
-                      Add to Cart
-                    </Button>
 
                     <Typography variant="body2">
                       {JSON.stringify(selectedOptions)}
                     </Typography>
                   </Container>
+
+                  {/* Subtotal */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      border: "1px solid #e0e0e0",
+                      borderRadius: "8px",
+                      padding: "16px",
+                      px: 4,
+                      my: 2
+                    }}
+                  >
+                    {/* Price and Discount Section */}
+                    <Box>
+                      <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                        $
+                        {(
+                          (((unitPrice * (100 - product.promoPercentageOff)) /
+                            100) *
+                            quantity *
+                            (100 - bulkDiscountPercentageOff)) /
+                          100
+                        ).toFixed(2)}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        (Excl. of Tax)
+                      </Typography>
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", mt: 1 }}
+                      >
+                        <Typography
+                          variant="body1"
+                          sx={{
+                            textDecoration: "line-through",
+                            color: "gray",
+                            mr: 2,
+                          }}
+                        >
+                          ${(unitPrice * quantity).toFixed(2)}
+                        </Typography>
+                        
+                        <Box
+                          sx={{
+                            backgroundColor: "#4caf50",
+                            color: "#fff",
+                            padding: "4px 8px",
+                            borderRadius: "4px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Save {product.promoPercentageOff}%
+                        </Box>
+                        { bulkDiscountPercentageOff > 0 && (
+                          <Box
+                          sx={{
+                            backgroundColor: "#4caf50",
+                            color: "#fff",
+                            padding: "4px 8px",
+                            borderRadius: "4px",
+                            fontWeight: "bold",
+                            ml: 1
+                          }}
+                        >
+                          Bulk Save {bulkDiscountPercentageOff}%
+                        </Box>
+                        )}
+                        
+                      </Box>
+                    </Box>
+
+                    {/* Quantity Control Section */}
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <QuantityInput
+                      initialValue={quantity}
+                      onChange={handleQuantityChange}
+                    />
+                    </Box>
+
+                    {/* Add to Cart Button */}                    
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      onClick={handleAddToCart}
+                      sx={{ borderRadius: 2 ,fontWeight: "bold", fontFamily: 'inherit'}}
+                    >
+                      Add to Cart
+                    </Button>
+                  </Box>
                 </Container>
               </Grid>
 

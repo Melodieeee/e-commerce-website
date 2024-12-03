@@ -31,8 +31,8 @@ const QuantityInput: React.FC<QuantityInputProps> = ({
   };  
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(parseInt(e.target.value) || 0);
-    onChange && onChange(parseInt(e.target.value) || 0);
+    setValue(parseInt(e.target.value) || 1);
+    onChange && onChange(parseInt(e.target.value) || 1);
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ const QuantityInput: React.FC<QuantityInputProps> = ({
 
 
   return (
-    <Container className="quantity-input">
+    <Container  sx={{boarder: "3px solid #000"}}>
       <button
         className="quantity-input__modifier quantity-input__modifier--left"
         onClick={decrement}

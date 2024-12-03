@@ -86,7 +86,10 @@ const BodyComponents: React.FC<HomeBodyProps> = () => {
       </Box>
 
       {/* ProductListSwiper */}
-      <ProductListSwiper products={Products} productCategories={ProductCategories} />
+      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", paddingY: 4 }}>
+        <ProductListSwiper products={Products} productCategories={ProductCategories} />
+      </Box>
+      
     </div>
   );
 };
