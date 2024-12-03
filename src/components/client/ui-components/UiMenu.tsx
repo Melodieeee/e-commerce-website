@@ -5,10 +5,10 @@ import MenuItem from "@mui/joy/MenuItem";
 import Paper from "@mui/material/Paper";
 import MenuTabs from "./UiMenuTabs";
 import Box from "@mui/material/Box";
-import { ProductCategory } from "@/lib/models/interfaces/IProductCategory";
+import { IProductCategory } from "@/lib/models/interfaces/IProductCategory";
 
 interface MenuProps {
-  productCategories: ProductCategory[];
+  productCategories: IProductCategory[];
   hoveredTab: string | null;
   menuAnchorEl: HTMLElement | null;
   hoverTabRef: React.MutableRefObject<HTMLElement | null>;
@@ -66,15 +66,22 @@ const Menu: React.FC<MenuProps> = ({
             {productCategories.map((item) => {
               if (item.name === hoveredTab) {
                 return item.children.map((childId) => {
-                  const childItem: ProductCategory | undefined = productCategories.find(
-                    (child: ProductCategory) => child.categoryId === childId
+                  const childItem: IProductCategory | undefined = productCategories.find(
+                    (child: IProductCategory) => child.categoryId === childId
                   );
                   if (childItem) {
                     return (
                       <MenuItem
+                      sx={{ fontFamily: "Montserrat" }}
                         key={childId}
-                        onClick={() => {
+                        onMouseEnter={() => {
                           setSelectedCategoryId(childItem.categoryId);
+                        }}
+                        onClick={() => {
+                          window.location.href = `/client/product-category/${childItem.name
+                            .toLowerCase()
+                            .split(" ")
+                            .join("-")}?id=${childItem.categoryId}`;
                         }}
                       >
                         {childItem.name}
@@ -92,7 +99,7 @@ const Menu: React.FC<MenuProps> = ({
               productCategories={productCategories}
               selectedCategoryId={selectedCategoryId}
             />
-          )}   
+          )}
         </Box>
       </Paper>
     </Popper>

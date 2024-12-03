@@ -43,7 +43,7 @@ const Products: IProduct[] = [
   {
     productId: "1",
     sku: "SKU-1",
-    defaultCategoryIds: ["all", "wide-format-print", "banner"],
+    defaultCategoryIds: ["all", "wide-format-print", "banner", "banner-stand"],
     categoryIds: ["banner-stand"],
     productName: "Product 1",
     productCoverPic:
@@ -381,107 +381,7 @@ const Products: IProduct[] = [
     sku: "BBVBCB01",
     defaultCategoryIds: ["all", "best-sellers"],
     categoryIds: ["best-sellers", "banner"], //save the last child
-    productName: "Indoor Banner",
-    productCoverPic:
-      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/m/i/microsoftteams-image_17_.png",
-    productPics: [
-      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/i/n/indoor-banners-4.jpg",
-      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/i/n/indoor-banners_3.jpg",
-      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/i/n/indoor-banner-1.jpg",
-      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/b/a/banner-finishing-options_10_2.jpg",
-    ],
-    description: `Indoor Banners are Durable, Customizable, and High-Quality
-    Passing on your brand message to your target audience is necessary for many companies. Our vinyl custom banners offer you an effective way to attract new customers. Choose from various templates to make your unique brand designs.
-    
-    Made of high-quality PVC, these vinyl banners are durable and will convey your message to customers effectively for a long time. The UV-resistant material won't fade, retaining vibrant colours. These indoor marketing products are also ideal for outdoor events.
-    
-    With resolutions of up to 720 DPI, our store banners provide quality and sharp images that attract the customer's attention from a distance. Full-colour printing has a large gamut that provides quality and vibrant prints, ensuring every detail is visible.
-    
-    Our custom banners offer versatility with multiple options to choose from. They come in various sizes and graphics to suit the style of your brand. These customizable banners allow you to upload the artwork to make unique designs. Enhance your banners with accessories such as hanging clamp bars and nylon ropes.
-    
-    Portable and Eco-friendly Indoor Banners
-    We use an eco-solvent printing mechanism to produce these vinyl banners. The biodegradable ink is safe for the environment and contains no harmful ingredients. These marketing materials contribute to sustainable business practices.
-    
-    Our lightweight store banners are easy to relocate to any of your events. They fold and unfold easily without leaving permanent wrinkles. Since they allow multiple uses, you don't have to purchase new banners, saving on your long-term ad spend.
-    
-    Vinyl Banners are Easy to Clean and Maintain
-    Easy to clean, vinyl banners don't require detergents. These low-maintenance banners require simple dusting to achieve a clear new look. You can also gently wipe them with a damp, soft cloth, thus saving you time and money.
-    
-    Shop for indoor banners for your business online at BannerBuzz.`,
-    attributes: [
-      {
-        optionName: "Size",
-        selections: [
-          {
-            selectionName: '10"x 10"',
-            price: 10.99,
-            hasExplainPic: false,
-            explainPic: undefined,
-          },
-        ],
-      },
-    ],
-    minSelection: ['10"x 10"', 10.99],
-    bulkDiscounts: [],
-    promoPercentageOff: 0,
-    isUploadFiles: true,
-  },
-  {
-    productId: "6",
-    sku: "BBVBCB01",
-    defaultCategoryIds: ["all", "business-card"],
-    categoryIds: ["business-card"], //save the last child
-    productName: "Indoor Banners",
-    productCoverPic:
-      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/m/i/microsoftteams-image_17_.png",
-    productPics: [
-      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/i/n/indoor-banners-4.jpg",
-      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/i/n/indoor-banners_3.jpg",
-      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/i/n/indoor-banner-1.jpg",
-      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/b/a/banner-finishing-options_10_2.jpg",
-    ],
-    description: `Indoor Banners are Durable, Customizable, and High-Quality
-    Passing on your brand message to your target audience is necessary for many companies. Our vinyl custom banners offer you an effective way to attract new customers. Choose from various templates to make your unique brand designs.
-    
-    Made of high-quality PVC, these vinyl banners are durable and will convey your message to customers effectively for a long time. The UV-resistant material won't fade, retaining vibrant colours. These indoor marketing products are also ideal for outdoor events.
-    
-    With resolutions of up to 720 DPI, our store banners provide quality and sharp images that attract the customer's attention from a distance. Full-colour printing has a large gamut that provides quality and vibrant prints, ensuring every detail is visible.
-    
-    Our custom banners offer versatility with multiple options to choose from. They come in various sizes and graphics to suit the style of your brand. These customizable banners allow you to upload the artwork to make unique designs. Enhance your banners with accessories such as hanging clamp bars and nylon ropes.
-    
-    Portable and Eco-friendly Indoor Banners
-    We use an eco-solvent printing mechanism to produce these vinyl banners. The biodegradable ink is safe for the environment and contains no harmful ingredients. These marketing materials contribute to sustainable business practices.
-    
-    Our lightweight store banners are easy to relocate to any of your events. They fold and unfold easily without leaving permanent wrinkles. Since they allow multiple uses, you don't have to purchase new banners, saving on your long-term ad spend.
-    
-    Vinyl Banners are Easy to Clean and Maintain
-    Easy to clean, vinyl banners don't require detergents. These low-maintenance banners require simple dusting to achieve a clear new look. You can also gently wipe them with a damp, soft cloth, thus saving you time and money.
-    
-    Shop for indoor banners for your business online at BannerBuzz.`,
-    attributes: [
-      {
-        optionName: "Size",
-        selections: [
-          {
-            selectionName: '10"x 10"',
-            price: 10.99,
-            hasExplainPic: false,
-            explainPic: undefined,
-          },
-        ],
-      },
-    ],
-    minSelection: ['10"x 10"', 10.99],
-    bulkDiscounts: [],
-    promoPercentageOff: 0,
-    isUploadFiles: true,
-  },
-  {
-    productId: "6",
-    sku: "BBVBCB01",
-    defaultCategoryIds: ["all", "business-card"],
-    categoryIds: ["business-card"], //save the last child
-    productName: "Indoor Banners",
+    productName: "Indoor Banner 1",
     productCoverPic:
       "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/m/i/microsoftteams-image_17_.png",
     productPics: [
@@ -528,6 +428,106 @@ const Products: IProduct[] = [
   },
   {
     productId: "7",
+    sku: "BBVBCB01",
+    defaultCategoryIds: ["all", "business-card"],
+    categoryIds: ["business-card"], //save the last child
+    productName: "Indoor Banner 2",
+    productCoverPic:
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/m/i/microsoftteams-image_17_.png",
+    productPics: [
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/i/n/indoor-banners-4.jpg",
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/i/n/indoor-banners_3.jpg",
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/i/n/indoor-banner-1.jpg",
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/b/a/banner-finishing-options_10_2.jpg",
+    ],
+    description: `Indoor Banners are Durable, Customizable, and High-Quality
+    Passing on your brand message to your target audience is necessary for many companies. Our vinyl custom banners offer you an effective way to attract new customers. Choose from various templates to make your unique brand designs.
+    
+    Made of high-quality PVC, these vinyl banners are durable and will convey your message to customers effectively for a long time. The UV-resistant material won't fade, retaining vibrant colours. These indoor marketing products are also ideal for outdoor events.
+    
+    With resolutions of up to 720 DPI, our store banners provide quality and sharp images that attract the customer's attention from a distance. Full-colour printing has a large gamut that provides quality and vibrant prints, ensuring every detail is visible.
+    
+    Our custom banners offer versatility with multiple options to choose from. They come in various sizes and graphics to suit the style of your brand. These customizable banners allow you to upload the artwork to make unique designs. Enhance your banners with accessories such as hanging clamp bars and nylon ropes.
+    
+    Portable and Eco-friendly Indoor Banners
+    We use an eco-solvent printing mechanism to produce these vinyl banners. The biodegradable ink is safe for the environment and contains no harmful ingredients. These marketing materials contribute to sustainable business practices.
+    
+    Our lightweight store banners are easy to relocate to any of your events. They fold and unfold easily without leaving permanent wrinkles. Since they allow multiple uses, you don't have to purchase new banners, saving on your long-term ad spend.
+    
+    Vinyl Banners are Easy to Clean and Maintain
+    Easy to clean, vinyl banners don't require detergents. These low-maintenance banners require simple dusting to achieve a clear new look. You can also gently wipe them with a damp, soft cloth, thus saving you time and money.
+    
+    Shop for indoor banners for your business online at BannerBuzz.`,
+    attributes: [
+      {
+        optionName: "Size",
+        selections: [
+          {
+            selectionName: '10"x 10"',
+            price: 10.99,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+        ],
+      },
+    ],
+    minSelection: ['10"x 10"', 10.99],
+    bulkDiscounts: [],
+    promoPercentageOff: 0,
+    isUploadFiles: true,
+  },
+  {
+    productId: "8",
+    sku: "BBVBCB01",
+    defaultCategoryIds: ["all", "business-card"],
+    categoryIds: ["business-card"], //save the last child
+    productName: "Indoor Banner 3",
+    productCoverPic:
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/m/i/microsoftteams-image_17_.png",
+    productPics: [
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/i/n/indoor-banners-4.jpg",
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/i/n/indoor-banners_3.jpg",
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/i/n/indoor-banner-1.jpg",
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/b/a/banner-finishing-options_10_2.jpg",
+    ],
+    description: `Indoor Banners are Durable, Customizable, and High-Quality
+    Passing on your brand message to your target audience is necessary for many companies. Our vinyl custom banners offer you an effective way to attract new customers. Choose from various templates to make your unique brand designs.
+    
+    Made of high-quality PVC, these vinyl banners are durable and will convey your message to customers effectively for a long time. The UV-resistant material won't fade, retaining vibrant colours. These indoor marketing products are also ideal for outdoor events.
+    
+    With resolutions of up to 720 DPI, our store banners provide quality and sharp images that attract the customer's attention from a distance. Full-colour printing has a large gamut that provides quality and vibrant prints, ensuring every detail is visible.
+    
+    Our custom banners offer versatility with multiple options to choose from. They come in various sizes and graphics to suit the style of your brand. These customizable banners allow you to upload the artwork to make unique designs. Enhance your banners with accessories such as hanging clamp bars and nylon ropes.
+    
+    Portable and Eco-friendly Indoor Banners
+    We use an eco-solvent printing mechanism to produce these vinyl banners. The biodegradable ink is safe for the environment and contains no harmful ingredients. These marketing materials contribute to sustainable business practices.
+    
+    Our lightweight store banners are easy to relocate to any of your events. They fold and unfold easily without leaving permanent wrinkles. Since they allow multiple uses, you don't have to purchase new banners, saving on your long-term ad spend.
+    
+    Vinyl Banners are Easy to Clean and Maintain
+    Easy to clean, vinyl banners don't require detergents. These low-maintenance banners require simple dusting to achieve a clear new look. You can also gently wipe them with a damp, soft cloth, thus saving you time and money.
+    
+    Shop for indoor banners for your business online at BannerBuzz.`,
+    attributes: [
+      {
+        optionName: "Size",
+        selections: [
+          {
+            selectionName: '10"x 10"',
+            price: 10.99,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+        ],
+      },
+    ],
+    minSelection: ['10"x 10"', 10.99],
+    bulkDiscounts: [],
+    promoPercentageOff: 0,
+    isUploadFiles: true,
+  },
+  {
+    productId: "9",
     sku: "BBVBCB07",
     defaultCategoryIds: ["all", "business-card"],
     categoryIds: ["business-card"], //save the last child

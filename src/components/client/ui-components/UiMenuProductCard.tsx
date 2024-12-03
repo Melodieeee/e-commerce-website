@@ -3,11 +3,12 @@ import AspectRatio from "@mui/joy/AspectRatio";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import CardOverflow from "@mui/joy/CardOverflow";
-import { Product } from "@/lib/models/interfaces/IProduct";
+import { IProduct } from "@/lib/models/interfaces/IProduct";
 import { paths } from "@/paths";
+import { Typography } from "@mui/material";
 
 interface ProductCardProps {
-  products: Product[]; 
+  products: IProduct[]; 
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ products }) => { 
@@ -39,9 +40,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
             </AspectRatio>
           </CardOverflow>
           <CardContent>
-            <div className="text-primary">
+            <Typography variant="body2" sx={{ fontFamily: "Montserrat" }}>
               {product.productName}
-            </div>
+            </Typography>
           </CardContent>
         </Card>
       ))}

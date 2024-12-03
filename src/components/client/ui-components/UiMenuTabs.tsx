@@ -3,13 +3,13 @@ import Tabs from "@mui/joy/Tabs";
 import TabList from "@mui/joy/TabList";
 import { TabPanel } from "@mui/joy";
 import Tab, { tabClasses } from "@mui/joy/Tab";
-import { Product } from "@/lib/models/interfaces/IProduct";
-import { ProductCategory } from "@/lib/models/interfaces/IProductCategory";
+import { IProduct } from "@/lib/models/interfaces/IProduct";
+import { IProductCategory } from "@/lib/models/interfaces/IProductCategory";
 import { Products } from "@/test-data/DemoComponents";
 import ProductCard from "@/components/client/ui-components/UiMenuProductCard";
 
 interface TabsProps {
-  productCategories: ProductCategory[];
+  productCategories: IProductCategory[];
   selectedCategoryId: string;
 }
 
@@ -19,36 +19,31 @@ const TabsSegmentedControls: React.FC<TabsProps> = ({
 }) => {
   const [selectedTabIndex, setSelectedTabIndex] = React.useState<number>(0);
 
-  const selectedCategory: ProductCategory | undefined = productCategories.find(
-    (category: ProductCategory) => category.categoryId === selectedCategoryId
+  const selectedCategory: IProductCategory | undefined = productCategories.find(
+    (category: IProductCategory) => category.categoryId === selectedCategoryId
   );
 
-  const thirdLevelCategories: ProductCategory[] = selectedCategory
+  const thirdLevelCategories: IProductCategory[] = selectedCategory
     ? selectedCategory.children
         .map((childId: string) =>
           productCategories.find(
-            (category: ProductCategory) => category.categoryId === childId
+            (category: IProductCategory) => category.categoryId === childId
           )
         )
         .filter(
-          (category): category is ProductCategory => category !== undefined
+          (category): category is IProductCategory => category !== undefined
         )
     : [];
 
-  const handleTabChange = (
-    event: React.SyntheticEvent<Element, Event> | null,
-    newValue: string | number | null
-  ) => {
-    if (typeof newValue === 'number') {
-      setSelectedTabIndex(newValue);
-    }
+  const handleTabHover = (index: number) => {
+    setSelectedTabIndex(index);
   };
 
   return (
     <Tabs
       aria-label="tabs"
       value={selectedTabIndex}
-      onChange={handleTabChange}
+      onChange={(_, newValue) => setSelectedTabIndex(Number(newValue))}
       sx={{ bgcolor: "transparent", flexWrap: "wrap" }}
     >
       <TabList
@@ -65,26 +60,34 @@ const TabsSegmentedControls: React.FC<TabsProps> = ({
           },
         }}
       >
-        {thirdLevelCategories.map((category: ProductCategory, index) => (
-          <Tab key={category.categoryId} disableIndicator value={index}>
+        {thirdLevelCategories.map((category: IProductCategory, index) => (
+          <Tab
+            sx={{ fontFamily: "Montserrat" }}
+            key={category.categoryId}
+            disableIndicator
+            value={index}
+            onMouseEnter={() => handleTabHover(index)} // Changes the tab on hover
+            onMouseDown={() => {
+              // Redirect on click
+              window.location.href = `/client/product-category/${category.name
+                .toLowerCase()
+                .split(" ")
+                .join("-")}?id=${category.categoryId}`;
+            }}
+          >
             {category.name}
           </Tab>
         ))}
       </TabList>
-      {thirdLevelCategories.map((category: ProductCategory, index) => {
-        const filteredProducts = Products.filter((product: Product) =>
+
+      {thirdLevelCategories.map((category: IProductCategory, index) => {
+        const filteredProducts = Products.filter((product: IProduct) =>
           product.categoryIds.includes(category.categoryId)
         );
 
         return (
-          <TabPanel
-            key={category.categoryId}
-            value={index}
-            color="primary"
-          >
-            <ProductCard
-              products={filteredProducts}  
-            />
+          <TabPanel key={category.categoryId} value={index} color="primary">
+            <ProductCard products={filteredProducts} />
           </TabPanel>
         );
       })}
