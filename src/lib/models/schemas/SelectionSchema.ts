@@ -9,5 +9,5 @@ const SelectionSchema = new Schema<ISelection>({
   customChoice: { type: String, required: false }
 });
 
-const Selection = model('Selection', SelectionSchema);
+const Selection = models.Selection || model('Selection', SelectionSchema);
 export default Selection;

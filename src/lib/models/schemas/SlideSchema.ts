@@ -7,5 +7,5 @@ const SlideSchema = new Schema<ISlide>({
   slideDesc: { type: String }
 });
 
-const Slide = mongoose.model('Slide', SlideSchema);
+const Slide = models.Slide || model('Slide', SlideSchema);
 export default Slide;

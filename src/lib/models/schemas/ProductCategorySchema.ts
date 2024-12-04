@@ -7,5 +7,5 @@ const ProductCategorySchema = new Schema<IProductCategory>({
   children: { type: [String]}
 });
 
-const ProductCategory = mongoose.model('ProductCategory', ProductCategorySchema);
+const ProductCategory = models.ProductCategory || model('ProductCategory', ProductCategorySchema);
 export default ProductCategory;
