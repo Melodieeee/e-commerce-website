@@ -20,8 +20,8 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="en">
       <head>
-        <title>Imaginarium of Vancouver</title>
-        <meta name="description" content="Imaginarium of Vancouver" />
+        <title>E-Commerce Website</title>
+        <meta name="description" content="E-Commerce Website" />
       </head>
       <body>
         {/* {children} */}

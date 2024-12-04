@@ -116,7 +116,7 @@ export default function JoySignUpSide() {
               >
                 <BadgeRoundedIcon />
               </IconButton>
-              <Typography level="title-lg">Imaginarium of Vancouver</Typography>
+              <Typography level="title-lg">E-Commerce Website</Typography>
             </Box>
             <ColorSchemeToggle />
           </Box>
@@ -250,7 +250,7 @@ export default function JoySignUpSide() {
                 },
               })}
             >
-              © Imaginarium of Vancouver {new Date().getFullYear()}
+              © E-Commerce Website {new Date().getFullYear()}
             </Typography>
           </Box>
         </Box>
