@@ -1,4 +1,4 @@
-// pages/admin/index.tsx
+// route: /admin
 import '@/globals.css';
 import React from 'react';
 
