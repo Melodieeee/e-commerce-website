@@ -22,6 +22,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
         <meta name="description" content="Admin Panel" />
       </head>
       <body>
+        <p>Admin Panel</p>
         {children}
       </body>
     </html>
