@@ -1,4 +1,4 @@
-import {model, models, Schema} from 'mongoose';
+import { model, models, Schema } from 'mongoose';
 import { IProduct } from '../interfaces/IProduct';
 import Attribute from './AttributeSchema';
 import BulkDiscount from './BulkDiscountSchema';

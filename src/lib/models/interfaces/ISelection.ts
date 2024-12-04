@@ -11,5 +11,6 @@ export interface ISelection {
     price: number;
     hasExplainPic: boolean;
     explainPic: string | undefined;
-    customChoice?: string;
+    customChoice: string;
+    // customChoice?: string;
 }

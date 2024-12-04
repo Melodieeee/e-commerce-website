@@ -31,6 +31,7 @@ export interface IProduct {
       price: number;
       hasExplainPic: boolean;
       explainPic: string | undefined;
+      customChoice: string;
     }[];
   }[];
   minSelection: [string, number];
