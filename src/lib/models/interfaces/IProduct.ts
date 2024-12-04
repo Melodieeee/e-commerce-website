@@ -1,5 +1,5 @@
-//import { IAttribute } from './IAttribute';
-//import { IBulkDiscount } from './IBulkDiscount';
+import { IAttribute } from './IAttribute';
+import { IBulkDiscount } from './IBulkDiscount';
 
 // export interface IProduct {
 //   productId: string;
@@ -24,21 +24,9 @@ export interface IProduct {
   productCoverPic: string;
   productPics: string[];
   description: string;
-  attributes: {
-    optionName: string;
-    selections: {
-      selectionName: string;
-      price: number;
-      hasExplainPic: boolean;
-      explainPic: string | undefined;
-      customChoice: string;
-    }[];
-  }[];
+  attributes: IAttribute[];
   minSelection: [string, number];
-  bulkDiscounts: {
-    quantity: number;
-    percentageOff: number;
-  }[];
+  bulkDiscounts: IBulkDiscount[];
   promoPercentageOff: number;
   isUploadFiles: boolean;
 }
