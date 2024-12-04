@@ -1,9 +1,8 @@
+'use client';
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Product from "../../../../lib/models/schemas/ProductSchema";
 import { useParams } from "next/navigation";
-
-
 
 export async function GET(request: Request, context:any) {
     const { productId } = useParams<{ productId: string }>() || {

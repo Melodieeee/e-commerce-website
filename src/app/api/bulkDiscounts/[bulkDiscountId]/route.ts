@@ -4,8 +4,6 @@ import dbConnect from "@/lib/mongodb";
 import BulkDiscount from "../../../../lib/models/schemas/BulkDiscountSchema";
 import { useParams } from "next/navigation";
 
-
-
 export async function GET(request: Request,{ params }: { params: { bulkDiscountId: string } }) {
     const bulkDiscountId = params.bulkDiscountId;
     console.log('id = ', bulkDiscountId);
