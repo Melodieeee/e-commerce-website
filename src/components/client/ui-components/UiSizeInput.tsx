@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   Card,
-  useTheme,
   TextField,
   InputAdornment,
 } from "@mui/material";
@@ -38,7 +37,6 @@ const SizeInput: React.FC<SizeInputProps> = ({
   onSizeChange,
   initialSize,
 }) => {
-  
   const [width, setWidth] = useState<number | null>(1);
   const [height, setHeight] = useState<number | null>(1);
   const [widthInputError, setWidthInputError] = useState(false);
@@ -50,7 +48,6 @@ const SizeInput: React.FC<SizeInputProps> = ({
     if (initialSize) {
       try {
         const { initialWidth, initialHeight } = extractDimensions(initialSize);
-        // Set initial state values for width and height
         setWidth(initialWidth);
         setHeight(initialHeight);
         setSizePrice(price * initialWidth * initialHeight);
@@ -59,20 +56,17 @@ const SizeInput: React.FC<SizeInputProps> = ({
         console.error(error.message);
       }
     }
-  }, []); 
+  }, [initialSize, price]);
 
   const handleCardClick = () => {
     console.log("card clicked");
     setShowInput(true);
-    //onSizeChange(index, size, sizePrice);
     setSizeAndSizePrice(width, height);
   };
 
   const handleCloseInput = () => {
     setShowInput(false);
     console.log("card closed");
-    //onSizeChange(index, size, sizePrice);
-    //setSizeAndSizePrice();
   };
 
   const setSizeAndSizePrice = (
@@ -80,45 +74,41 @@ const SizeInput: React.FC<SizeInputProps> = ({
     newHeight: number | null
   ) => {
     if (newWidth !== null && newHeight !== null) {
-      //setSize(`${newWidth}" X ${newHeight}"`);
       setSizePrice(price * newWidth * newHeight);
       onSizeChange(
         index,
         `${newWidth}" X ${newHeight}"`,
         parseFloat((price * newWidth * newHeight).toFixed(2))
-      ); // Pass the updated size
+      );
     } else {
-      //setSize("invalid size");
       setSizePrice(0);
-      onSizeChange(index, "invalid size", 0); // Pass the updated
+      onSizeChange(index, "invalid size", 0);
     }
   };
 
   const handleWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = parseFloat(e.target.value);
-    // Check if the input matches the pattern of positive integers or positive decimal numbers with up to two decimal places
     if (inputValue <= 0.5 || isNaN(inputValue)) {
       setWidthInputError(true);
       setWidth(null);
-      setSizeAndSizePrice(null, height); // Pass null for width to indicate it's not valid
+      setSizeAndSizePrice(null, height);
     } else {
       setWidthInputError(false);
       setWidth(inputValue);
-      setSizeAndSizePrice(inputValue, height); // Pass the updated width
+      setSizeAndSizePrice(inputValue, height);
     }
   };
 
   const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = parseFloat(e.target.value);
-    // Check if the input matches the pattern of positive integers or positive decimal numbers with up to two decimal places
     if (inputValue <= 0.5 || isNaN(inputValue)) {
       setHeightInputError(true);
       setHeight(null);
-      setSizeAndSizePrice(width, null); // Pass null for height to indicate it's not valid
+      setSizeAndSizePrice(width, null);
     } else {
       setHeightInputError(false);
       setHeight(inputValue);
-      setSizeAndSizePrice(width, inputValue); // Pass the updated height
+      setSizeAndSizePrice(width, inputValue);
     }
   };
 
@@ -136,7 +126,7 @@ const SizeInput: React.FC<SizeInputProps> = ({
           alignItems: "center",
           border:
             index === selectedCardIndex
-              ? `2px solid ${useTheme().palette.secondary.main}`
+              ? `2px solid #000000`
               : "2px solid transparent",
           cursor: "pointer",
         }}
@@ -156,8 +146,8 @@ const SizeInput: React.FC<SizeInputProps> = ({
           style={{
             position: "absolute",
             zIndex: 1000,
-            display: "", // Use flexbox
-            alignItems: "center", // Center align items vertically
+            display: "flex",
+            alignItems: "center",
             backgroundColor: "#ffffff",
             padding: "20px",
             borderRadius: "5px",
@@ -171,13 +161,13 @@ const SizeInput: React.FC<SizeInputProps> = ({
             value={width}
             onChange={handleWidthChange}
             error={widthInputError}
-            helperText={widthInputError ? "must be greater than 0.5" : ""}
+            helperText={widthInputError ? "Must be greater than 0.5" : ""}
             sx={{ marginBottom: 1 }}
             InputProps={{
-              endAdornment: <InputAdornment position="end">"</InputAdornment>, // Change "Prefix" to the desired prefix
+              endAdornment: <InputAdornment position="end">&quot;</InputAdornment>,
               inputProps: {
-                step: 0.01, // optional: adjust the step size
-                min: 0.51, // minimum value allowed (0.5 + step)
+                step: 0.01,
+                min: 0.51,
               },
             }}
             size="small"
@@ -192,13 +182,13 @@ const SizeInput: React.FC<SizeInputProps> = ({
             value={height}
             onChange={handleHeightChange}
             error={heightInputError}
-            helperText={heightInputError ? "must be greater than 0.5" : ""}
+            helperText={heightInputError ? "Must be greater than 0.5" : ""}
             sx={{ marginBottom: 1 }}
             InputProps={{
-              endAdornment: <InputAdornment position="end">"</InputAdornment>, // Change "Prefix" to the desired prefix
+              endAdornment: <InputAdornment position="end">&quot;</InputAdornment>,
               inputProps: {
-                step: 0.01, // optional: adjust the step size
-                min: 0.51, // minimum value allowed (0.5 + step)
+                step: 0.01,
+                min: 0.51,
               },
             }}
             size="small"
@@ -219,6 +209,7 @@ const SizeInput: React.FC<SizeInputProps> = ({
           onClick={handleCloseInput}
         />
       )}
+
       {(widthInputError || heightInputError) && (
         <Typography
           variant="body2"
@@ -230,21 +221,22 @@ const SizeInput: React.FC<SizeInputProps> = ({
           Please enter a valid size
         </Typography>
       )}
+
       {width && height && (
-        <Typography
-          variant="body2"
-          align="center"
-          gutterBottom
-          color={useTheme().palette.secondary.main}
-          style={{ marginTop: "auto", marginBottom: "auto" }}
-        >
-          {width}" X {height}"
-        </Typography>
-      )}
-      {width && height && (
-        <Typography variant="body2" align="center" gutterBottom>
-          {`$${sizePrice.toFixed(2)}`}
-        </Typography>
+        <>
+          <Typography
+            variant="body2"
+            align="center"
+            gutterBottom
+            color="#000000"
+            style={{ marginTop: "auto", marginBottom: "auto" }}
+          >
+            {`${width}" X ${height}"`}
+          </Typography>
+          <Typography variant="body2" align="center" gutterBottom>
+            {`$${sizePrice.toFixed(2)}`}
+          </Typography>
+        </>
       )}
     </>
   );

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { ProductBreadcrumbs } from "@/components/client/ui-components/UiBreadcrumb";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
 import {
   Container,
   Box,
@@ -10,7 +8,6 @@ import {
   TextField,
   Button,
   Link,
-  useTheme,
   IconButton,
   Divider,
 } from "@mui/material";
@@ -353,7 +350,7 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                           variant="body2"
                           sx={{ ml: 1, my: 1, color: "#FF0000" }}
                         >
-                          You haven't uploaded any art works yet.
+                          You haven&apos;t uploaded any art works yet.
                         </Typography>
                       ) : (
                         <>

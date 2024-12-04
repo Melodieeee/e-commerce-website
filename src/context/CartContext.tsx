@@ -27,10 +27,10 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const savedCartItems = localStorage.getItem("cartItems");
       if (savedCartItems) {
         setCartItems(JSON.parse(savedCartItems));
-        console.log("Initial cart items from localStorage:", cartItems);
       }
     }
   }, []);
+  console.log("Initial cart items from localStorage:", cartItems);
 
   // Save cart items to localStorage whenever they change
   useEffect(() => {

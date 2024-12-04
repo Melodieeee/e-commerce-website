@@ -80,7 +80,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
           alignItems: "center",
           border:
             index === selectedCardIndex
-              ? `2px solid ${useTheme().palette.secondary.main}`
+              ? `2px solid #000000`
               : "2px solid transparent",
           cursor: "pointer",
         }}

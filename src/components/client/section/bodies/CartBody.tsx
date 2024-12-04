@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Container,
   Box,
   Grid,
   Divider,
-  ListItem,
-  ListItemText,
   IconButton,
   Button,
   Tooltip,
@@ -20,18 +18,12 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import HelpIcon from "@mui/icons-material/Help";
-// import {
-//   getCartItems,
-//   deleteAllCartItems,
-//   deleteCartItem,
-//   editCartItemQuantity,
-// } from "@/CartStorage";
 import QuantityInput from "@/components/client/ui-components/UiQuantityInput";
 import { ICartItem } from "@/lib/models/interfaces/ICartItem";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useCart } from "@/context/CartContext";
 
-import { Add, Remove, Edit, Delete } from "@mui/icons-material";
+
 
 const BodyComponents = () => {
   const router = useRouter();
@@ -110,6 +102,7 @@ const BodyComponents = () => {
           <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
             {cartItems.map((item, index) => (
               <Card
+                key={index}
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",

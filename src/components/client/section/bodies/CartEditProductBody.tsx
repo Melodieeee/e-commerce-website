@@ -10,7 +10,6 @@ import {
   TextField,
   Button,
   Link,
-  useTheme,
   IconButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete"; // Import DeleteIcon
@@ -367,7 +366,7 @@ const BodyComponents: React.FC<BodyComponentsProps> = ({
                           variant="body2"
                           sx={{ ml: 1, my: 1, color: "#FF0000" }}
                         >
-                          You haven't uploaded any art works yet.
+                          You haven&apos;t uploaded any art works yet.
                         </Typography>
                       ) : (
                         <>

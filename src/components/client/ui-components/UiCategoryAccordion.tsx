@@ -42,11 +42,12 @@ const UiCategoryAccordion: React.FC<CustomAccordionProps> = ({ category }) => {
           <Typography>Category</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {ProductCategories.map((category) => {
+          {ProductCategories.map((category, index) => {
             // children categories
             if (allChildrenIds.includes(category.categoryId)) {
               return (
                 <Button
+                  key={index}
                   fullWidth // Makes the button occupy the whole row
                   variant="text"
                   size="small"
