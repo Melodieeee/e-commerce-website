@@ -1,4 +1,4 @@
-# [E-Commerce Website](https://e-commerce-website-798bunbt1-melodieeees-projects.vercel.app)
+# [E-Commerce Website](https://e-commerce-website-git-main-melodieeees-projects.vercel.app)
 
 ## Overview
 This is an ongoing eCommerce project built using **Next.js** and **Node.js**, with **TypeScript** for type safety and **MongoDB** as the database. The platform serves two types of users: 
@@ -70,4 +70,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 ## Deploy on Vercel
 
 - The website is deployed using the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-- visit here: [E-Commerce Website](https://e-commerce-website-798bunbt1-melodieeees-projects.vercel.app)
+- visit here: [E-Commerce Website](https://e-commerce-website-git-main-melodieeees-projects.vercel.app)
