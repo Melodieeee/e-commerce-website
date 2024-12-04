@@ -21,6 +21,7 @@ export async function GET(request: Request, context:any) {
    
 }
 
+// ALWAYS ERROR I DONT KNOW WHY
 // export async function POST(request: Request) {
 //     //const requestData = await request.json();
 //     //console.log('request is ', requestData['name']);
@@ -45,31 +46,31 @@ export async function GET(request: Request, context:any) {
 //     return NextResponse.json({ message: "POST data!" });
 // }
 
-export async function POST(request: Request) {
-    const requestData = await request.formData();
-    const attributes = JSON.parse(requestData.get('attributes') as string || '[]');
-    const bulkDiscounts = JSON.parse(requestData.get('bulkDiscounts') as string || '[]');
-    const minSelection = JSON.parse(requestData.get('minSelection') as string || '[]');
+// export async function POST(request: Request) {
+//     const requestData = await request.formData();
+//     const attributes = JSON.parse(requestData.get('attributes') as string || '[]');
+//     const bulkDiscounts = JSON.parse(requestData.get('bulkDiscounts') as string || '[]');
+//     const minSelection = JSON.parse(requestData.get('minSelection') as string || '[]');
 
-    try {
-        const product = await Product.create({
-            sku: requestData.get('sku'),
-            defaultCategoryIds: requestData.get('defaultCategoryIds'),
-            categoryIds: requestData.get('categoryIds'),
-            productName: requestData.get('productName'),
-            productCoverPic: requestData.get('productCoverPic'),
-            productPics: JSON.parse(requestData.get('productPics') as string || '[]'),
-            description: requestData.get('description'),
-            attributes: attributes,
-            minSelection: minSelection,
-            bulkDiscounts: bulkDiscounts,
-            promoPercentageOff: Number(requestData.get('promoPercentageOff')),
-            isUploadFiles: requestData.get('isUploadFiles') === 'true',
-        });
+//     try {
+//         const product = await Product.create({
+//             sku: requestData.get('sku'),
+//             defaultCategoryIds: requestData.get('defaultCategoryIds'),
+//             categoryIds: requestData.get('categoryIds'),
+//             productName: requestData.get('productName'),
+//             productCoverPic: requestData.get('productCoverPic'),
+//             productPics: JSON.parse(requestData.get('productPics') as string || '[]'),
+//             description: requestData.get('description'),
+//             attributes: attributes,
+//             minSelection: minSelection,
+//             bulkDiscounts: bulkDiscounts,
+//             promoPercentageOff: Number(requestData.get('promoPercentageOff')),
+//             isUploadFiles: requestData.get('isUploadFiles') === 'true',
+//         });
 
-        return NextResponse.json({ message: "Product created!", product });
-    } catch (error) {
-        console.error("Error creating product:", error);
-        return NextResponse.json({ error: "Failed to create product" }, { status: 500 });
-    }
-}
+//         return NextResponse.json({ message: "Product created!", product });
+//     } catch (error) {
+//         console.error("Error creating product:", error);
+//         return NextResponse.json({ error: "Failed to create product" }, { status: 500 });
+//     }
+// }
