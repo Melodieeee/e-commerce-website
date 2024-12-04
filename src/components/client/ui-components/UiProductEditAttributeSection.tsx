@@ -19,11 +19,9 @@ interface ProductEditAttributeSectionProps {
   customChoices?: { [key: string]: ISelection };
 }
 
-const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = ({
-  attribute,
-  handleSelectionChange,
-  customChoices,
-}) => {
+const ProductEditAttributeSection: React.FC<
+  ProductEditAttributeSectionProps
+> = ({ attribute, handleSelectionChange, customChoices }) => {
   // Initialize the text field values from customChoices
   const initialTextFieldValues = attribute.selections.map((selection) => {
     return selection.selectionName === "Custom Text"
@@ -32,7 +30,9 @@ const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = 
   });
 
   // State to store the text field values
-  const [textFieldValues, setTextFieldValues] = useState<string[]>(initialTextFieldValues);
+  const [textFieldValues, setTextFieldValues] = useState<string[]>(
+    initialTextFieldValues
+  );
 
   // State to store the selected card index
   const [selectedCardIndex, setSelectedCardIndex] = React.useState<
@@ -87,7 +87,7 @@ const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = 
   );
 
   // Calculate the height multiplier based on the maxLength
-  const heightMultiplier = 4; // Adjust this value as needed
+  const heightMultiplier = 8; // Adjust this value as needed
   const maxHeight = maxLength * heightMultiplier;
 
   useEffect(() => {
@@ -154,31 +154,33 @@ const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = 
                 selection.selectionName === "Custom Text"
                   ? "1 1 100%"
                   : "0 1 auto",
-              mx:1
+              mx: 1,
             }}
           >
             {/* custom text */}
-            
+
             {selection.selectionName === "Custom Text" ? (
-             <> <TextField
-                hiddenLabel
-                id={`custom-text-textfield-${attribute.optionName}`}
-                multiline
-                variant="filled"
-                rows={3}
-                value={textFieldValues[index]} // Bind value to state
-                onChange={(e) => handleTextFieldChange(index, e.target.value)} // Update state on change
-                sx={{
-                  width: "100%", // Set width to match its container
-                  border:
-                    index === selectedCardIndex
-                      ? `2px solid #000`
-                      : "2px solid transparent",
-                  borderRadius: "5px",
-                  overflowY: "auto", // Enable vertical scrolling if needed
-                }}
-              />
-              {index === selectedCardIndex &&
+              <>
+                {" "}
+                <TextField
+                  hiddenLabel
+                  id={`custom-text-textfield-${attribute.optionName}`}
+                  multiline
+                  variant="filled"
+                  rows={3}
+                  value={textFieldValues[index]} // Bind value to state
+                  onChange={(e) => handleTextFieldChange(index, e.target.value)} // Update state on change
+                  sx={{
+                    width: "100%", // Set width to match its container
+                    border:
+                      index === selectedCardIndex
+                        ? `2px solid #000`
+                        : "2px solid transparent",
+                    borderRadius: "5px",
+                    overflowY: "auto", // Enable vertical scrolling if needed
+                  }}
+                />
+                {index === selectedCardIndex &&
                   textFieldValues[index]?.trim() === "" && (
                     <Typography
                       variant="body2"
@@ -197,7 +199,9 @@ const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = 
                 selectedCardIndex={selectedCardIndex}
                 maxHeight={maxHeight}
                 onColorSelected={handleCustomColorSelected}
-                initialColor={customChoices?.[attribute.optionName]?.customChoice}
+                initialColor={
+                  customChoices?.[attribute.optionName]?.customChoice
+                }
               />
             ) : // custom size
             selection.selectionName === "Custom Size" ? (
@@ -207,12 +211,15 @@ const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = 
                 maxHeight={maxHeight}
                 price={selection.price}
                 onSizeChange={handleCustomSizeSelected}
-                initialSize={customChoices?.[attribute.optionName]?.customChoice}
+                initialSize={
+                  customChoices?.[attribute.optionName]?.customChoice
+                }
               />
             ) : (
               <Card
                 style={{
-                  width: "90px",
+                  padding: !selection.hasExplainPic ? "15px" : "0px", // Set padding to 15px if there is no image
+                  width: "100px",
                   height: !selection.hasExplainPic ? `${maxHeight}px` : "auto", // Set height to maxHeight if there is an image
                   borderRadius: "5px",
                   display: "flex",
@@ -243,7 +250,6 @@ const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = 
                     variant="body1"
                     align="center"
                     gutterBottom
-                    style={{ marginTop: "auto", marginBottom: "auto" }}
                   >
                     {selection.selectionName}
                   </Typography>
@@ -252,12 +258,7 @@ const ProductEditAttributeSection: React.FC<ProductEditAttributeSectionProps> = 
             )}
 
             {selection.hasExplainPic && (
-              <Typography
-                variant="body1"
-                align="center"
-                gutterBottom
-                style={{ marginTop: "", marginBottom: "0" }}
-              >
+              <Typography variant="body1" align="center" gutterBottom>
                 {selection.selectionName}
               </Typography>
             )}

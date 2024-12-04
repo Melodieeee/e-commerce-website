@@ -261,10 +261,16 @@ const Products: IProduct[] = [
   {
     productId: "3",
     sku: "SKU-3",
-    defaultCategoryIds: ["all", "regilar-format-print", "card","business-card"],
+    defaultCategoryIds: [
+      "all",
+      "regilar-format-print",
+      "card",
+      "business-card",
+    ],
     categoryIds: ["business-card", "best-sellers"], //save the last child
     productName: "Product 3",
-    productCoverPic: "Not Found",
+    productCoverPic:
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/c/f/cfmstc01_stretch-table-cover.jpg",
     productPics: [],
     description: "This is a description for product 3",
     attributes: [
@@ -339,7 +345,7 @@ const Products: IProduct[] = [
   {
     productId: "5",
     sku: "BBSTRE01",
-    defaultCategoryIds: ["all", "banner","retractable-banner"],
+    defaultCategoryIds: ["all", "banner", "retractable-banner"],
     categoryIds: ["retractable-banner"], //save the last child
     productName: "Step and Repeat Banner",
     productCoverPic:
@@ -577,6 +583,405 @@ const Products: IProduct[] = [
     isUploadFiles: true,
   },
 
+  // Foam Sign - Foam Board
+  {
+    productId: "10",
+    sku: "SKU-10",
+    defaultCategoryIds: ["all", "others", "foam-sign", "foam-board"],
+    categoryIds: ["foam-board"],
+    productName: "Foam Board",
+    productCoverPic:
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/b/b/bbpfbs01_1.jpg",
+    productPics: [
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/b/b/bbpfbs01_1.jpg",
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/b/b/bbpfbs02_1.jpg",
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/b/b/bbpfbs03_1.jpg",
+    ],
+    description: "Lightweight foam boards for indoor use.",
+    attributes: [
+      {
+        optionName: "Size",
+        selections: [
+          {
+            selectionName: '24"x 36"',
+            price: 25.99,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+          {
+            selectionName: '36"x 48"',
+            price: 35.99,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+        ],
+      },
+      {
+        optionName: "Thickness",
+        selections: [
+          {
+            selectionName: "3mm",
+            price: 1.0,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+          {
+            selectionName: "5mm",
+            price: 5,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+        ],
+      },
+      {
+        optionName: "Mounting Options",
+        selections: [
+          {
+            selectionName: "None",
+            price: 0,
+            hasExplainPic: true,
+            explainPic:
+              "https://cdn.bannerbuzz.ca/media/optionvalue/Mounting-No-Holes-116-x-116_3.jpg",
+          },
+          {
+            selectionName: "Hanging",
+            price: 5,
+            hasExplainPic: true,
+            explainPic:
+              "https://cdn.bannerbuzz.ca/media/optionvalue/Mounting-Holes-at-Top-and-Bottom-116-x-116_3.jpg",
+          },
+          {
+            selectionName: "Easel Back",
+            price: 10,
+            hasExplainPic: true,
+            explainPic:
+              "https://cdn.bannerbuzz.ca/media/optionvalue/Mounting-Holes-at-Left-and-Right-116-x-116_3.jpg",
+          },
+        ],
+      },
+    ],
+    minSelection: ["3mm", 1.99],
+    bulkDiscounts: [
+      {
+        quantity: 25,
+        percentageOff: 10,
+      },
+      {
+        quantity: 100,
+        percentageOff: 20,
+      },
+    ],
+    promoPercentageOff: 5,
+    isUploadFiles: false,
+  },
+
+  // Vehicle Decal - Car Decal
+  {
+    productId: "11",
+    sku: "SKU-11",
+    defaultCategoryIds: [
+      "all",
+      "installation-service",
+      "vehicle-decal",
+      "car-decal",
+    ],
+    categoryIds: ["car-decal"],
+    productName: "Car Decal",
+    productCoverPic:
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/b/b/bbcdsc02_car-decals-stickers-clear_1.jpg",
+    productPics: [
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/c/a/car-decals-stickers-clear-flash-cut-1.jpg",
+    ],
+    description: "Durable car decals for promotional or personal use.",
+    attributes: [
+      {
+        optionName: "Material",
+        selections: [
+          {
+            selectionName: "Vinyl",
+            price: 15.99,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+          {
+            selectionName: "Magnetic",
+            price: 25.99,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+        ],
+      },
+    ],
+    minSelection: ["Vinyl", 15.99],
+    bulkDiscounts: [
+      {
+        quantity: 50,
+        percentageOff: 10,
+      },
+      {
+        quantity: 200,
+        percentageOff: 25,
+      },
+    ],
+    promoPercentageOff: 50,
+    isUploadFiles: true,
+  },
+
+  // Book - Booklet
+  {
+    productId: "12",
+    sku: "SKU-12",
+    defaultCategoryIds: ["all", "regilar-format-print", "book", "booklet"],
+    categoryIds: ["booklet"],
+    productName: "Custom Booklet",
+    productCoverPic:
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/u/p/upsrbo01_1.jpg",
+    productPics: [
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/u/p/upsrbo01_1.jpg",
+    ],
+    description:
+      "Personalized booklets for events, presentations, or portfolios.",
+    attributes: [
+      {
+        optionName: "Page Count",
+        selections: [
+          {
+            selectionName: "20 Pages",
+            price: 10.99,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+          {
+            selectionName: "40 Pages",
+            price: 18.99,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+        ],
+      },
+      {
+        optionName: "Orientation",
+        selections: [
+          {
+            selectionName: "Horizontal",
+            price: 0,
+            hasExplainPic: true,
+            explainPic:
+              "https://cdn.bannerbuzz.ca/media/catalog/product/u/p/upsrbo01_1.jpg",
+          },
+          {
+            selectionName: "Vertical",
+            price: 0,
+            hasExplainPic: true,
+            explainPic:
+              "https://cdn.bannerbuzz.ca/media/catalog/product/u/p/upsrbo02_1.jpg",
+          },
+        ],
+      },
+    ],
+    minSelection: ["20 Pages", 10.99],
+    bulkDiscounts: [],
+    promoPercentageOff: 5,
+    isUploadFiles: true,
+  },
+
+  // Custom T-Shirt
+  {
+    productId: "13",
+    sku: "SKU-13",
+    defaultCategoryIds: ["all", "others", "custom-t-shirt", "t-shirt"],
+    categoryIds: ["t-shirt"],
+    productName: "Custom T-Shirt",
+    productCoverPic:
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/b/b/bbmtscnnp_1_us.jpg",
+    productPics: [
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/b/b/bbmtscnnp_1_us.jpg",
+      "https://cdn.bannerbuzz.ca/media/catalog/product/resize/650/b/b/bbmtscnnp_4_us.jpg",
+    ],
+    description: "Design your own t-shirt with logos or messages.",
+    attributes: [
+      {
+        optionName: "Size",
+        selections: [
+          {
+            selectionName: "Small",
+            price: 9.99,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+          {
+            selectionName: "Medium",
+            price: 12.99,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+          {
+            selectionName: "Large",
+            price: 15.99,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+        ],
+      },
+      {
+        optionName: "Material",
+        selections: [
+          {
+            selectionName: "Cotton",
+            price: 0,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+          {
+            selectionName: "Polyester",
+            price: 2,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+        ],
+      },
+    ],
+    minSelection: ["Small", 9.99],
+    bulkDiscounts: [
+      {
+        quantity: 10,
+        percentageOff: 10,
+      },
+    ],
+    promoPercentageOff: 10,
+    isUploadFiles: true,
+  },
+
+  {
+    productId: "14",
+    sku: "SKU-14",
+    defaultCategoryIds: ["all", "design-service", "logo-design"],
+    categoryIds: ["logo-design"],
+    productName: "Basic Logo Design",
+    productCoverPic: "https://cdn.logo-design-basic.jpg",
+    productPics: [
+      "https://cdn.logo-design-basic.jpg",
+      "https://swiperjs.com/demos/images/nature-1.jpg",
+      "https://swiperjs.com/demos/images/nature-2.jpg",
+    ],
+    description: "A simple and elegant logo design perfect for startups.",
+    attributes: [
+      {
+        optionName: "File Format",
+        selections: [
+          {
+            selectionName: "JPEG",
+            price: 0,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+          {
+            selectionName: "PNG",
+            price: 5,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+          {
+            selectionName: "Vector (SVG)",
+            price: 15,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+        ],
+      },
+    ],
+    minSelection: ["JPEG", 0],
+    bulkDiscounts: [],
+    promoPercentageOff: 5,
+    isUploadFiles: false,
+  },
+  {
+    productId: "15",
+    sku: "SKU-15",
+    defaultCategoryIds: ["all", "design-service", "logo-design"],
+    categoryIds: ["logo-design"],
+    productName: "Premium Logo Design",
+    productCoverPic: "https://cdn.logo-design-premium.jpg",
+    productPics: [
+      "https://cdn.logo-design-premium.jpg",
+      "https://swiperjs.com/demos/images/nature-3.jpg",
+      "https://swiperjs.com/demos/images/nature-4.jpg",
+    ],
+    description:
+      "Professional and detailed logo design for established businesses.",
+    attributes: [
+      {
+        optionName: "Revisions",
+        selections: [
+          {
+            selectionName: "2 Revisions",
+            price: 50,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+          {
+            selectionName: "Unlimited Revisions",
+            price: 75,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+        ],
+      },
+    ],
+    minSelection: ["2 Revisions", 50],
+    bulkDiscounts: [
+      {
+        quantity: 5,
+        percentageOff: 10,
+      },
+    ],
+    promoPercentageOff: 0,
+    isUploadFiles: true,
+  },
+  {
+    productId: "16",
+    sku: "SKU-16",
+    defaultCategoryIds: ["all", "design-service", "logo-design"],
+    categoryIds: ["logo-design"],
+    productName: "Logo Redesign Service",
+    productCoverPic: "https://cdn.logo-redesign.jpg",
+    productPics: [
+      "https://cdn.logo-redesign.jpg",
+      "https://swiperjs.com/demos/images/nature-5.jpg",
+      "https://swiperjs.com/demos/images/nature-6.jpg",
+    ],
+    description:
+      "Revamp your existing logo to better represent your brand identity.",
+    attributes: [
+      {
+        optionName: "Style",
+        selections: [
+          {
+            selectionName: "Minimalistic",
+            price: 30,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+          {
+            selectionName: "Modern",
+            price: 40,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+          {
+            selectionName: "Vintage",
+            price: 35,
+            hasExplainPic: false,
+            explainPic: undefined,
+          },
+        ],
+      },
+    ],
+    minSelection: ["Minimalistic", 30],
+    bulkDiscounts: [],
+    promoPercentageOff: 10,
+    isUploadFiles: true,
+  },
 ];
 
 const ProductCategories: IProductCategory[] = [
@@ -873,7 +1278,7 @@ const ProductCategories: IProductCategory[] = [
     name: "Stretch Table Throw",
     description: "Stretch Table Throw",
     children: [],
-  },  
+  },
 ];
 
 export { CompanyInfo, UiCarouselImages, Products, ProductCategories };
