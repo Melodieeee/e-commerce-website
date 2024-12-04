@@ -9,7 +9,6 @@ import NotFoundBody from "@/components/client/section/bodies/NotFoundBody";
 import { useParams, useSearchParams } from "next/navigation";
 import { ProductCategories } from "@/test-data/DemoComponents";
 
-
 const ProductCategoriesPage = () => {
   const { categoryName } = useParams<{ categoryName: string }>() || {
     categoryName: "",

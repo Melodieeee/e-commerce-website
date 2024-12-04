@@ -3,4 +3,14 @@
 // in the email sent to them. The page will display a message confirming that the email address 
 // has been confirmed and provide a link to the login page.
 // Route: /client/sign-up/confirm
-'use client';
+import React from "react";
+import Layout from "@/components/client/Layout";
+
+export default function SignUpConfirmPage() {
+  return (
+    <Layout>
+      <h1>Sign Up Comfirm Page</h1>
+      <p>This is the sign up confirm page</p>
+    </Layout>
+  );
+}

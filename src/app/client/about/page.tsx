@@ -1,6 +1,5 @@
 // This page is the default page for the about section of the client. 
 // It will display three types of information: contact, conpany Info, gallery, and team.s
-'use client';
 import React from "react";
 import Layout from "@/components/client/Layout";
 
