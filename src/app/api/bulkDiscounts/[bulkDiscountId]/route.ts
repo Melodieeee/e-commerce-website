@@ -1,7 +1,7 @@
 
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
-import BulkDiscount from "../../../../lib/models/schemas/BulkDiscountSchema";
+import BulkDiscount from "@/lib/models/schemas/BulkDiscountSchema";
 import { useParams } from "next/navigation";
 
 export async function GET(request: Request,{ params }: { params: { bulkDiscountId: string } }) {
